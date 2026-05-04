@@ -1,0 +1,47 @@
+<div class="principal">
+  @if(showWelcomeCard) {
+    <mat-card appearance="outlined" class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>Bienvenido a tu App Collector</mat-card-title>
+      <mat-card-subtitle>La app que te ayudará a completar tu colección</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="welcome-content">
+        <p>¡Comenzemos!</p>
+        <form [formGroup]="welcomeForm" (ngSubmit)="submit()">
+          <mat-form-field class="form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="username" type="text">
+            @if(this.username.hasError('maxlength')){
+            <mat-error>El nombre de usuario debe ser máximo de 20 caracteres</mat-error>
+            }
+            @if(this.username.hasError('required')){
+            <mat-error>El nombre de usuario es requerido</mat-error>
+            }
+          </mat-form-field>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="o" class="mx-2">Hombre</mat-radio-button>
+            <mat-radio-button value="a" class="mx-2">Mujer</mat-radio-button>
+            <mat-radio-button value="x" class="mx-2">No binario</mat-radio-button>
+          </mat-radio-group>
+          <div class="align-end">
+            <button mat-button type="submit" [disabled]="this.welcomeForm.invalid">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <p class="short-message">Esta información no será almacenada fuera del sitio y sólo tú podrás verla</p>
+    </mat-card-actions>
+  </mat-card>
+  } @else {
+    <mat-card appearance="outlined" class="welcome-card">
+      <mat-card-header>
+        <mat-card-title> {{ greeting }} </mat-card-title>
+        <mat-card-subtitle>Comienza a registrar las estampas que ya tienes.</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

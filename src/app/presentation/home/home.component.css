@@ -1,0 +1,33 @@
+.principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.welcome-card {
+  max-width: 90vw;
+  min-width: 60vw;
+}
+
+.welcome-content {
+  padding-block: 15px;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.short-message{
+  font-size: 8pt;
+  margin-left: 10px;
+}
+
+.align-end {
+  display: flex;
+  justify-content: end;
+}
