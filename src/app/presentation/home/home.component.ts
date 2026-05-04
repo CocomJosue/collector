@@ -54,6 +54,7 @@ export class HomeComponent {
     if(this.welcomeForm.valid) {
       localStorage.setItem('username', this.username.value);
       localStorage.setItem('gender', this.gender.value);
+      window.location.reload();
     }
   }
 
