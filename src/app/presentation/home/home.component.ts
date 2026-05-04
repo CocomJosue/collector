@@ -5,6 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
+import { ProgressComponent } from '../progress/progress.component';
+import { AlbumPageComponent } from '../album-page/album-page.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatCardModule,
     MatRadioModule,
     MatButtonModule,
+    ProgressComponent,
+    AlbumPageComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

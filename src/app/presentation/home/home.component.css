@@ -31,3 +31,7 @@ mat-card-title {
   display: flex;
   justify-content: end;
 }
+
+.break-space {
+  padding-block: 5px; 
+}

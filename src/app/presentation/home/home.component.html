@@ -38,9 +38,15 @@
     <mat-card appearance="outlined" class="welcome-card">
       <mat-card-header>
         <mat-card-title> {{ greeting }} </mat-card-title>
-        <mat-card-subtitle>Comienza a registrar las estampas que ya tienes.</mat-card-subtitle>
+        <mat-card-subtitle>Comienza a registrar las estampas que ya tienes para actualizar tu progreso.</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
+        <div class="break-space">
+          <app-progress></app-progress>
+        </div>
+        <div class="break-space">
+          <app-album-page></app-album-page>
+        </div>
       </mat-card-content>
     </mat-card>
   }

@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="pageForm">
+    <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile>
+        <mat-form-field  class="form-field">
+          <mat-label>Group</mat-label>
+          <mat-select formControlName="selectedGroup">
+              @for(group of groups; track $index){
+                <mat-option [value]="group">Group {{ group.letter }}</mat-option>
+              }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field  class="form-field">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="selectedCountry">
+            @for(country of countries; track $index){
+            <mat-option [value]="country.code">{{ country.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
