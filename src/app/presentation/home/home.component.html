@@ -9,7 +9,7 @@
       <div class="welcome-content">
         <p>¡Comenzemos!</p>
         <form [formGroup]="welcomeForm" (ngSubmit)="submit()">
-          <mat-form-field class="form-field">
+          <mat-form-field class="form-field" appearance="outline">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="username" type="text">
             @if(this.username.hasError('maxlength')){
@@ -25,7 +25,7 @@
             <mat-radio-button value="x" class="mx-2">No binario</mat-radio-button>
           </mat-radio-group>
           <div class="align-end">
-            <button mat-button type="submit" [disabled]="welcomeForm.invalid">Guardar</button>
+            <button mat-flat-button type="submit" [disabled]="welcomeForm.invalid">Guardar</button>
           </div>
         </form>
       </div>
