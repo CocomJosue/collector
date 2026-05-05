@@ -15,6 +15,12 @@
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>País</mat-label>
           <mat-select formControlName="selectedCountry">
+            <mat-select-trigger>
+              <div class="selected">
+                <img width="32" [src]="getFlag(selectedCountry.value)">
+                <span>{{ selectedCountry.value }}</span>
+              </div>
+            </mat-select-trigger>
             @for(country of countries; track $index){
               <mat-option [value]="country.code">
                 <div class="d-flex">

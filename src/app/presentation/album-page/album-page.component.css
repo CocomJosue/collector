@@ -23,3 +23,8 @@
 img {
   margin-right: 25px;
 }
+
+.selected {
+  display: flex;
+  height: 20px;
+}
