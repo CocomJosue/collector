@@ -3,7 +3,7 @@
     <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Group</mat-label>
+          <mat-label>Grupo</mat-label>
           <mat-select formControlName="selectedGroup">
               @for(group of groups; track $index){
                 <mat-option [value]="group">Group {{ group.letter }}</mat-option>
@@ -13,10 +13,15 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Country</mat-label>
+          <mat-label>País</mat-label>
           <mat-select formControlName="selectedCountry">
             @for(country of countries; track $index){
-            <mat-option [value]="country.code">{{ country.name }}</mat-option>
+              <mat-option [value]="country.code">
+                <div class="d-flex">
+                  <img width="32" [src]="getFlag(country.code)">
+                  <span>{{ country.name }}</span>
+                </div>
+              </mat-option>
             }
           </mat-select>
         </mat-form-field>

@@ -19,3 +19,7 @@
   display: flex;
   justify-content: right;
 }
+
+img {
+  margin-right: 25px;
+}

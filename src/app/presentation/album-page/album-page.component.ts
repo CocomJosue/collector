@@ -53,6 +53,10 @@ export class AlbumPageComponent {
     });
   }
 
+  getFlag(code: string) {
+    return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
+  }
+
   submit() {
 
   }
