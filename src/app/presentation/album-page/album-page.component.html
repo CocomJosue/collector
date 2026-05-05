@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="pageForm">
+  <form [formGroup]="pageForm" (ngSubmit)="submit()">
     <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile>
         <mat-form-field  class="form-field">
@@ -22,5 +22,23 @@
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
+    @if(selectedGroup.value !== '' && selectedCountry.value != '') {
+      <div class="d-flex">
+        <div class="album-page">
+          <p>Estampas:</p>
+          <section formArrayName="selectedStickers">
+            @for(ctrl of selectedStickers.controls; track $index){
+              <mat-checkbox
+                [formControlName]="$index">
+                  {{ $index + 1}}
+              </mat-checkbox>
+            }
+          </section>
+        </div>
+      </div>
+    }
+    <div class="actions">
+      <button mat-button type="submit" [disabled]="pageForm.invalid">Guardar</button>
+    </div>
   </form>
 </div>

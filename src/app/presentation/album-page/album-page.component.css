@@ -1,3 +1,21 @@
 .form-field {
   width: 90%;
 }
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.album-page {
+  padding: 10px;
+  border: 2px solid #c0c4c9;
+  background-color: #dde6f0;
+  max-width: 500px;
+}
+
+.actions {
+  margin-top: 5px;
+  display: flex;
+  justify-content: right;
+}
