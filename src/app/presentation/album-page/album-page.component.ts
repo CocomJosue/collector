@@ -38,9 +38,9 @@ export class AlbumPageComponent {
   private _initForm() {
     this.pageForm = new FormGroup({
       selectedGroup: new FormControl<string | Group>('', [Validators.required]),
-      selectedCountry: new FormControl<string | Country>('', [Validators.required]),
+      selectedCountry: new FormControl<string>('', [Validators.required]),
       selectedStickers: new FormArray(
-        Array.from({ length: 30 }, () => new FormControl(false))
+        Array.from({ length: 20 }, () => new FormControl(false))
       )
     });
   }
@@ -49,6 +49,19 @@ export class AlbumPageComponent {
     this.selectedGroup.valueChanges.subscribe({
       next: (group: Group) => {
         this.countries = group.countries;
+        this.selectedCountry.setValue('', { emitEvent: false });
+        this.selectAll(false);
+      }
+    });
+
+    this.selectedCountry.valueChanges.subscribe({
+      next: (country: string) => {
+        const saved = localStorage.getItem(country);
+        if(saved) {
+          this.selectedStickers.setValue(JSON.parse(saved), { emitEvent: false });
+        } else {
+          this.selectAll(false);
+        }
       }
     });
   }
@@ -57,8 +70,16 @@ export class AlbumPageComponent {
     return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
   }
 
-  submit() {
+  selectAll(actual: boolean) {
+    for(const control of this.selectedStickers.controls) {
+      control.setValue(actual, { emitEvent: false });
+    }
+  }
 
+  submit() {
+    if(this.pageForm.valid){
+      localStorage.setItem(this.selectedCountry.value, JSON.stringify(this.selectedStickers.value));
+    }
   }
 
   get selectedGroup() {

@@ -36,7 +36,13 @@
     @if(selectedGroup.value !== '' && selectedCountry.value != '') {
       <div class="d-flex">
         <div class="album-page">
-          <p>Estampas:</p>
+          <div class="space-between">
+            <p>Estampas</p>
+            <mat-checkbox 
+              (change)="selectAll($event.checked)"
+              [labelPosition]="'before'">
+              Seleccionar todo</mat-checkbox>
+          </div>
           <section formArrayName="selectedStickers">
             @for(ctrl of selectedStickers.controls; track $index){
               <mat-checkbox
