@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ProgressService } from '../../infrastructure/progress.service';
 
 @Component({
   selector: 'app-progress',
@@ -11,6 +12,8 @@ import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/p
   styleUrl: './progress.component.css'
 })
 export class ProgressComponent {
+  progressService = inject(ProgressService);
+
   mode: ProgressSpinnerMode = 'determinate';
   value = 60;
 }

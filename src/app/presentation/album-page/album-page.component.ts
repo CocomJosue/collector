@@ -79,6 +79,10 @@ export class AlbumPageComponent {
   submit() {
     if(this.pageForm.valid){
       localStorage.setItem(this.selectedCountry.value, JSON.stringify(this.selectedStickers.value));
+      const checkedCount = this.selectedStickers.value
+        .filter((value: boolean) => value)
+        .length;
+      localStorage.setItem(`count${this.selectedCountry.value}`, checkedCount.toString());
     }
   }
 
