@@ -2,7 +2,7 @@
   <h3>Progreso total</h3>
   <mat-progress-spinner
     [mode]="mode"
-    [value]="value">
+    [value]="progressService.progress()">
   </mat-progress-spinner>
-  <h3>{{ value }}%</h3>
+  <h3>{{ progressService.progress() }}%</h3>
 </div>

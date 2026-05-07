@@ -40,7 +40,8 @@
             <p>Estampas</p>
             <mat-checkbox 
               (change)="selectAll($event.checked)"
-              [labelPosition]="'before'">
+              [labelPosition]="'before'"
+              formControlName="selectAllControl">
               Seleccionar todo</mat-checkbox>
           </div>
           <section formArrayName="selectedStickers">

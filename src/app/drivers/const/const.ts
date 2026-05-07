@@ -1,5 +1,7 @@
 import { Group } from "../../core/models/group.interface";
 
+export const TOTAL_COUNT = 960;
+
 export const GROUPS: Group[] = [
   { 
     letter: 'A',

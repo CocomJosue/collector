@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { GROUPS } from '../../drivers/const/const';
 import { Group } from '../../core/models/group.interface';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { Country } from '../../core/models/country.interface';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
+import { ProgressService } from '../../infrastructure/progress.service';
 
 @Component({
   selector: 'app-album-page',
@@ -26,6 +27,7 @@ import { MatButton } from '@angular/material/button';
   styleUrl: './album-page.component.css'
 })
 export class AlbumPageComponent {
+  progressService = inject(ProgressService);
   pageForm!: FormGroup;
   groups: Group[] = GROUPS;
   countries: Country[] = [];
@@ -41,7 +43,8 @@ export class AlbumPageComponent {
       selectedCountry: new FormControl<string>('', [Validators.required]),
       selectedStickers: new FormArray(
         Array.from({ length: 20 }, () => new FormControl(false))
-      )
+      ),
+      selectAllControl: new FormControl<boolean>(false, [])
     });
   }
 
@@ -61,6 +64,7 @@ export class AlbumPageComponent {
           this.selectedStickers.setValue(JSON.parse(saved), { emitEvent: false });
         } else {
           this.selectAll(false);
+          this.selectAllControl.setValue(false);
         }
       }
     });
@@ -83,6 +87,7 @@ export class AlbumPageComponent {
         .filter((value: boolean) => value)
         .length;
       localStorage.setItem(`count${this.selectedCountry.value}`, checkedCount.toString());
+      this.progressService.calculateProgress();
     }
   }
 
@@ -96,5 +101,9 @@ export class AlbumPageComponent {
 
   get selectedStickers() {
     return this.pageForm.get('selectedStickers') as FormArray;
+  }
+
+  get selectAllControl() {
+    return this.pageForm.get('selectAllControl') as FormControl;
   }
 }

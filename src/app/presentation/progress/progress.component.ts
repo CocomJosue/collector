@@ -13,7 +13,9 @@ import { ProgressService } from '../../infrastructure/progress.service';
 })
 export class ProgressComponent {
   progressService = inject(ProgressService);
-
   mode: ProgressSpinnerMode = 'determinate';
-  value = 60;
+
+  ngOnInit() {
+    this.progressService.calculateProgress();
+  }
 }
