@@ -1,63 +1,43 @@
 <h2 mat-dialog-title>Agregar una estampa repetida</h2>
 <mat-dialog-content>
   <form [formGroup]="repeatedForm" (ngSubmit)="submit()">
-    <mat-grid-list cols="2" rowHeight="100px">
-      <mat-grid-tile>
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Grupo</mat-label>
-          <mat-select formControlName="selectedGroup">
-            @for(group of groups; track $index){
-              <mat-option [value]="group">Group {{ group.letter }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>País</mat-label>
-          <mat-select formControlName="selectedCountry">
-            <mat-select-trigger>
-              <div class="selected">
-                <img width="32" [src]="getFlag(selectedCountry.value)">
-                <span>{{ selectedCountry.value }}</span>
-              </div>
-            </mat-select-trigger>
-            @for(country of countries; track $index){
-              <mat-option [value]="country.code">
-                <div class="d-flex">
-                  <img width="32" [src]="getFlag(country.code)">
-                  <span>{{ country.name }}</span>
-                </div>
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Número</mat-label>
-          <mat-select formControlName="selectedSticker">
-            @for(number of numbers; track number){
-              <mat-option [value]="number">
-                {{ number }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Veces</mat-label>
-          <mat-select formControlName="times">
-            @for(time of times; track time){
-              <mat-option [value]="time">
-                {{ time }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Grupo</mat-label>
+      <mat-select formControlName="selectedGroup">
+        @for(group of groups; track $index){
+          <mat-option [value]="group">Group {{ group.letter }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>País</mat-label>
+      <mat-select formControlName="selectedCountry">
+        <mat-select-trigger>
+          <div class="selected">
+            <img width="32" [src]="getFlag(selectedCountry.value)">
+            <span>{{ selectedCountry.value }}</span>
+          </div>
+        </mat-select-trigger>
+        @for(country of countries; track $index){
+          <mat-option [value]="country.code">
+            <div class="d-flex">
+              <img width="32" [src]="getFlag(country.code)">
+              <span>{{ country.name }}</span>
+            </div>
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Número</mat-label>
+      <mat-select formControlName="selectedSticker">
+        @for(number of numbers; track number){
+          <mat-option [value]="number">
+            {{ number }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
     <div class="actions">
       <button mat-button (click)="cancelAction()">Cerrar</button>
       <button

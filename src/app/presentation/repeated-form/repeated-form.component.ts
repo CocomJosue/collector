@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Group } from '../../core/models/group.interface';
 import { Country } from '../../core/models/country.interface';
 import { GROUPS } from '../../drivers/const/const';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { ToastrService } from 'ngx-toastr';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
@@ -21,7 +21,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogTitle,
     MatDialogContent,
     ReactiveFormsModule,
-    MatGridListModule,
     MatSelectModule
 ],
   templateUrl: './repeated-form.component.html',
@@ -33,7 +32,8 @@ export class RepeatedFormComponent {
   groups: Group[] = GROUPS;
   countries: Country[] = [];
   numbers = Array.from({ length: 20 }, (_, i) => i + 1);
-  times = Array.from({ length: 99 }, (_, i) => i + 1);
+
+  constructor(private _toastrService: ToastrService) {}
 
   ngOnInit() {
     this._initForm();
@@ -44,8 +44,7 @@ export class RepeatedFormComponent {
     this.repeatedForm = new FormGroup({
       selectedGroup: new FormControl<string | Group>('', [Validators.required]),
       selectedCountry: new FormControl<string>('', [Validators.required]),
-      selectedSticker: new FormControl<number>(0, [Validators.required]),
-      times: new FormControl<number>(0, [Validators.required])
+      selectedSticker: new FormControl<number>(0, [Validators.required])
     })
   }
 
@@ -54,6 +53,7 @@ export class RepeatedFormComponent {
       next: (group: Group) => {
         this.countries = group.countries;
         this.selectedCountry.setValue('', { emitEvent: false });
+        this.selectedSticker.setValue(0, { emitEvent: false });
       }
     });
   }
@@ -67,7 +67,36 @@ export class RepeatedFormComponent {
   }
 
   submit() {
-
+    if(this.repeatedForm.valid) {
+      const stickersObtained = localStorage.getItem(this.selectedCountry.value);
+      if(stickersObtained) {
+        const arrStickersObtained = JSON.parse(stickersObtained);
+        const sticker = arrStickersObtained.at(this.selectedSticker.value);        
+        if(sticker) {
+          const saved = localStorage.getItem(`rep${this.selectedCountry.value}`);
+          if(saved) {
+            const actual = JSON.parse(saved);
+            if(actual.includes(this.selectedSticker.value)){
+              this._toastrService.error('Esta estampa ya está registrada como repetida, no es necesario registrarla de nuevo');
+              return;
+            } else {
+              actual.push(this.selectedSticker.value);
+              localStorage.setItem(`rep${this.selectedCountry.value}`, JSON.stringify(actual))
+            }
+          } else {
+            const arrRepeats: any[] = [];
+            arrRepeats.push(this.selectedSticker.value);
+            localStorage.setItem(`rep${this.selectedCountry.value}`, JSON.stringify(arrRepeats))
+          }
+          this._toastrService.success('Estampa repetida guardada con éxito');
+          this.dialogRef.close();
+        } else {
+          this._toastrService.error('La estampa no está registrada, regresa al menú anterior');
+        }
+      } else { 
+          this._toastrService.error('Aún no registras estampas de este país. Regresa al menú anterior');
+      }
+    }
   }
 
   get selectedGroup() {
@@ -78,7 +107,7 @@ export class RepeatedFormComponent {
       return this.repeatedForm.get('selectedCountry') as FormControl;
     }
   
-    get selectedStickers() {
+    get selectedSticker() {
       return this.repeatedForm.get('selectedSticker') as FormControl;
     }
 }

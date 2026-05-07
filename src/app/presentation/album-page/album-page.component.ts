@@ -11,6 +11,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
 import { ProgressService } from '../../infrastructure/progress.service';
 import { RouterLink } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-album-page',
@@ -33,6 +34,8 @@ export class AlbumPageComponent {
   pageForm!: FormGroup;
   groups: Group[] = GROUPS;
   countries: Country[] = [];
+
+  constructor(private _toastrService: ToastrService) {}
 
   ngOnInit() {
     this._initForm();
@@ -82,8 +85,6 @@ export class AlbumPageComponent {
     }
   }
 
-
-
   submit() {
     if(this.pageForm.valid){
       localStorage.setItem(this.selectedCountry.value, JSON.stringify(this.selectedStickers.value));
@@ -92,6 +93,7 @@ export class AlbumPageComponent {
         .length;
       localStorage.setItem(`count${this.selectedCountry.value}`, checkedCount.toString());
       this.progressService.calculateProgress();
+      this._toastrService.success('Guardado con éxito');
     }
   }
 
