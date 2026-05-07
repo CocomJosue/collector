@@ -10,7 +10,18 @@
     </mat-card-header>
     <mat-card-content>
       <div class="repeated-content">
-        <p>¡Comenzemos!</p>
+        @if(repeatedList.length < 1) {
+          <p>Aún no tienes estampas repetidas</p>
+        } @else {
+          @for(repeatedItem of repeatedList; track $index) {
+            <div style="margin-bottom: 10px;">
+              <strong>{{ repeatedItem.key }}</strong>
+              @for(value of repeatedItem.values; track $index){
+                <span>{{ value }}</span>
+              }
+            </div>
+          }
+        }
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
