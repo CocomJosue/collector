@@ -1,5 +1,6 @@
-<div>
-  <form [formGroup]="pageForm" (ngSubmit)="submit()">
+<h2 mat-dialog-title>Agregar una estampa repetida</h2>
+<mat-dialog-content>
+  <form [formGroup]="repeatedForm" (ngSubmit)="submit()">
     <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile>
         <mat-form-field class="form-field" appearance="outline">
@@ -32,38 +33,38 @@
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-    </mat-grid-list>
-    @if(selectedGroup.value !== '' && selectedCountry.value != '') {
-      <div class="d-flex">
-        <div class="album-page">
-          <div class="space-between">
-            <p>Estampas</p>
-            <mat-checkbox 
-              (change)="selectAll($event.checked)"
-              [labelPosition]="'before'"
-              formControlName="selectAllControl">
-              Seleccionar todo</mat-checkbox>
-          </div>
-          <section formArrayName="selectedStickers">
-            @for(ctrl of selectedStickers.controls; track $index){
-              <mat-checkbox
-                [formControlName]="$index">
-                  {{ $index + 1}}
-              </mat-checkbox>
+      <mat-grid-tile>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Número</mat-label>
+          <mat-select formControlName="selectedSticker">
+            @for(number of numbers; track number){
+              <mat-option [value]="number">
+                {{ number }}
+              </mat-option>
             }
-          </section>
-        </div>
-      </div>
-    }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Veces</mat-label>
+          <mat-select formControlName="times">
+            @for(time of times; track time){
+              <mat-option [value]="time">
+                {{ time }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
     <div class="actions">
-      <button 
-        mat-stroked-button 
-        routerLink="/repeated">Repetidas</button>
-      <button mat-stroked-button>Intercambiar</button>
-      <button 
+      <button mat-button (click)="cancelAction()">Cerrar</button>
+      <button
         mat-flat-button 
-        type="submit" 
-        [disabled]="pageForm.invalid">Guardar</button>
+        cdkFocusInitial 
+        type="submit"
+        [disabled]="repeatedForm.invalid">Guardar</button>
     </div>
   </form>
-</div>
+</mat-dialog-content>

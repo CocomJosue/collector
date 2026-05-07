@@ -10,6 +10,7 @@ import { Country } from '../../core/models/country.interface';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
 import { ProgressService } from '../../infrastructure/progress.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-album-page',
@@ -17,12 +18,13 @@ import { ProgressService } from '../../infrastructure/progress.service';
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatSelectModule, 
+    MatSelectModule,
     MatInputModule,
     MatGridListModule,
     MatCheckbox,
-    MatButton
-  ],
+    MatButton,
+    RouterLink
+],
   templateUrl: './album-page.component.html',
   styleUrl: './album-page.component.css'
 })
@@ -79,6 +81,8 @@ export class AlbumPageComponent {
       control.setValue(actual, { emitEvent: false });
     }
   }
+
+
 
   submit() {
     if(this.pageForm.valid){

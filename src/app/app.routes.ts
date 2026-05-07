@@ -6,4 +6,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./presentation/home/home.component').then((m) => m.HomeComponent),
   },
+  {
+    path: 'repeated',
+    loadComponent: () =>
+      import('./presentation/repeated/repeated.component').then((m) => m.RepeatedComponent),
+  },
 ];
