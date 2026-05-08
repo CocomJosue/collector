@@ -5,6 +5,9 @@ import { RouterLink } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { RepeatedFormComponent } from '../repeated-form/repeated-form.component';
 import { GROUPS } from '../../drivers/const/const';
+import { MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-repeated',
@@ -12,14 +15,19 @@ import { GROUPS } from '../../drivers/const/const';
   imports: [
     MatCardModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    MatChipsModule,
+    MatIconModule
 ],
   templateUrl: './repeated.component.html',
   styleUrl: './repeated.component.css'
 })
 export class RepeatedComponent {
+  groups = GROUPS;
   readonly dialog = inject(MatDialog);
   repeatedList: { key: string, values: number[] }[] = [];
+
+  constructor(private _toastrService: ToastrService) {}
 
   ngOnInit() {
     this.loadRepeatedStickersList();
@@ -38,28 +46,29 @@ export class RepeatedComponent {
     return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
   }
 
-  getCountryGroup(code: string) {
-    for (const group of GROUPS) {
-      const country = group.countries.find(
-        c => c.code === code
-    );
-
-    if (country) {
-      return {
-        group: group.letter,
-        name: country.name
-      };
-    }
-  }
-
-    return null;
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(RepeatedFormComponent, { });
 
     dialogRef.afterClosed().subscribe(result => {
       this.loadRepeatedStickersList();
     });
+  }
+
+  getCode(item: string) {
+    return item.replace('rep', '');
+  }
+
+  remove(country: string, number: number) {    
+    const strRepeatedList = localStorage.getItem(`rep${country}`);
+    if(strRepeatedList) {
+      const repeatedList: any[] = JSON.parse(strRepeatedList);
+      const index = repeatedList.indexOf(number);
+      if (index !== -1) {
+        repeatedList.splice(index, 1);
+        localStorage.setItem(`rep${country}`, JSON.stringify(repeatedList));
+        this._toastrService.success(`Se eliminó la estampa repetida ${country}${number}`);
+        this.loadRepeatedStickersList();
+      }
+    }
   }
 }

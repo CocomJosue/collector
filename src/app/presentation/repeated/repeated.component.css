@@ -1,21 +1,47 @@
+mat-card {
+  background-color: rgba(255, 255, 255, 0.8)
+}
+
 .principal {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   align-items: center;
   justify-content: center;
 }
 
-.repeated-section {
-  max-width: 90vw;
-  max-height: 90%;
-  overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.8)
-}
-
 .repeated-content {
   padding-block: 15px;
+  max-width: 90vw;
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+}
+
+mat-card-subtitle {
+  max-width: 80vw;
 }
 
 button {
   margin-left: 10px;
+}
+
+.country {
+  border: 1px solid #000;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 385px;
+}
+
+.head-country {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+mat-chip-row {
+  margin-left: 5px;
 }

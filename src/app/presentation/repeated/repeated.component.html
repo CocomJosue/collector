@@ -1,5 +1,5 @@
 <div class="principal">
-  <mat-card appearance="outlined" class="repeated-section">
+  <mat-card appearance="outlined">
     <mat-card-header>
       <mat-card-title>
         Estampas repetidas
@@ -14,12 +14,22 @@
           <p>Aún no tienes estampas repetidas</p>
         } @else {
           @for(repeatedItem of repeatedList; track $index) {
-            <div style="margin-bottom: 10px;">
-              <strong>{{ repeatedItem.key }}</strong>
-              @for(value of repeatedItem.values; track $index){
-                <span>{{ value }}</span>
-              }
-            </div>
+            @if(repeatedItem.values.length > 0) {
+              <div class="country">
+                <div class="head-country">
+                  <p>{{ getCode(repeatedItem.key) }}</p>
+                  <img width="32" [src]="getFlag(getCode(repeatedItem.key))">
+                </div>
+                @for(value of repeatedItem.values; track $index){
+                  <mat-chip-row (removed)="remove(getCode(repeatedItem.key), value)">
+                    {{ value }}
+                    <button matChipRemove [attr.aria-label]="'remove ' + value">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                }
+              </div>
+            }
           }
         }
       </div>
