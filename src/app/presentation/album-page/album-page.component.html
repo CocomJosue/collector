@@ -55,15 +55,13 @@
         </div>
       </div>
     }
-    <div class="actions">
-      <button 
-        mat-stroked-button 
-        routerLink="/repeated">Repetidas</button>
-      <button mat-stroked-button>Intercambiar</button>
-      <button 
-        mat-flat-button 
-        type="submit" 
-        [disabled]="pageForm.invalid">Guardar</button>
-    </div>
+    @if(pageForm.valid) {
+      <div class="actions">
+        <button 
+          mat-flat-button 
+          type="submit" 
+          [disabled]="pageForm.invalid">Guardar</button>
+      </div>
+    }
   </form>
 </div>

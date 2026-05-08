@@ -7,6 +7,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import { ProgressComponent } from '../progress/progress.component';
 import { AlbumPageComponent } from '../album-page/album-page.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ import { AlbumPageComponent } from '../album-page/album-page.component';
     MatRadioModule,
     MatButtonModule,
     ProgressComponent,
-    AlbumPageComponent
+    AlbumPageComponent,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
