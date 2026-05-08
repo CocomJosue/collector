@@ -27,10 +27,11 @@ mat-card-subtitle {
 .form-field {
   width: 100%;
 }
-z
+
 .short-message{
   font-size: 8pt;
   margin-left: 10px;
+  max-width: 80vw;
 }
 
 .align-end {
