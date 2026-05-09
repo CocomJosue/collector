@@ -30,10 +30,10 @@ export class RepeatedComponent {
   constructor(private _toastrService: ToastrService) {}
 
   ngOnInit() {
-    this.loadRepeatedStickersList();
+    this._loadRepeatedStickersList();
   }
 
-  loadRepeatedStickersList() {
+  private _loadRepeatedStickersList() {
     this.repeatedList = Object.keys(localStorage)
     .filter(key => key.startsWith('rep'))
     .map(key => ({
@@ -50,7 +50,7 @@ export class RepeatedComponent {
     const dialogRef = this.dialog.open(RepeatedFormComponent, { });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.loadRepeatedStickersList();
+      this._loadRepeatedStickersList();
     });
   }
 
@@ -67,7 +67,7 @@ export class RepeatedComponent {
         repeatedList.splice(index, 1);
         localStorage.setItem(`rep${country}`, JSON.stringify(repeatedList));
         this._toastrService.success(`Se eliminó la estampa repetida ${country}${number}`);
-        this.loadRepeatedStickersList();
+        this._loadRepeatedStickersList();
       }
     }
   }

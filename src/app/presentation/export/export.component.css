@@ -46,3 +46,17 @@ button {
 mat-chip-row {
   margin-left: 5px;
 }
+
+.form-field {
+  width: 100%;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+img {
+  margin-right: 25px;
+}

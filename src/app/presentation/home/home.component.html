@@ -3,7 +3,7 @@
     <mat-card appearance="outlined">
     <mat-card-header>
       <mat-card-title>Bienvenido a tu App Collector</mat-card-title>
-      <mat-card-subtitle>La app que te ayudará a completar tu colección</mat-card-subtitle>
+      <mat-card-subtitle>La app que te ayudará a completar tu colección.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="welcome-content">
@@ -53,8 +53,12 @@
       <mat-card-actions align="end">
         <button 
           mat-stroked-button 
+          color="accent"
           routerLink="/repeated">Repetidas</button>
-        <button mat-stroked-button>Intercambiar</button>
+        <button 
+          mat-stroked-button
+          color="accent"
+          routerLink="/export">Intercambiar</button>
       </mat-card-actions>
     </mat-card>
   }

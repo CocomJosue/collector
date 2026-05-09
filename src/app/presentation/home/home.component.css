@@ -22,6 +22,7 @@ mat-card-title {
 
 mat-card-subtitle {
   max-width: 80vw;
+  text-align: justify;
 }
 
 .form-field {
@@ -41,4 +42,8 @@ mat-card-subtitle {
 
 .break-space {
   padding-block: 5px; 
+}
+
+button {
+  margin-left: 10px;
 }

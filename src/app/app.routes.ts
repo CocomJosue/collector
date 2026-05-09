@@ -11,4 +11,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./presentation/repeated/repeated.component').then((m) => m.RepeatedComponent),
   },
+  {
+    path: 'export',
+    loadComponent: () =>
+      import('./presentation/export/export.component').then((m) => m.ExportComponent),
+  },
 ];

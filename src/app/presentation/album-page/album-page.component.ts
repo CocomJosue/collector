@@ -23,8 +23,7 @@ import { ToastrService } from 'ngx-toastr';
     MatInputModule,
     MatGridListModule,
     MatCheckbox,
-    MatButton,
-    RouterLink
+    MatButton
 ],
   templateUrl: './album-page.component.html',
   styleUrl: './album-page.component.css'

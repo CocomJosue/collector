@@ -1,0 +1,74 @@
+<div class="principal">
+  <form [formGroup]="exportForm" (ngSubmit)="submit()">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          Intercambiar estampas
+        </mat-card-title>
+        <mat-card-subtitle>
+          En esta sección podrás exportar las estampas que tienes respetidas por las que te hacen falta.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="repeated-content">
+          @if(repeatedList.length < 1) {
+            <p>Aún no tienes estampas repetidas</p>
+          } @else {
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Exportar por</mat-label>
+              <mat-select formControlName="exportBy">
+                @for(opt of options; track $index){
+                  <mat-option [value]="opt">{{ opt }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-grid-list cols="2" rowHeight="100px">
+              @if(exportBy.value == 'Grupo' || exportBy.value == 'Pais') {
+                <mat-grid-tile>
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Grupo</mat-label>
+                    <mat-select formControlName="selectedGroup">
+                      @for(group of groups; track $index){
+                        <mat-option [value]="group">Group {{ group.letter }}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+              }
+              @if(exportBy.value == 'Pais') {
+                <mat-grid-tile>
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>País</mat-label>
+                    <mat-select formControlName="selectedCountry">
+                      <mat-select-trigger>
+                        <div class="selected">
+                          <img width="32" [src]="getFlag(selectedCountry.value)">
+                          <span>{{ selectedCountry.value }}</span>
+                        </div>
+                      </mat-select-trigger>
+                      @for(country of countries; track $index){
+                        <mat-option [value]="country.code">
+                          <div class="d-flex">
+                            <img width="32" [src]="getFlag(country.code)">
+                            <span>{{ country.name }}</span>
+                          </div>
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+              }
+            </mat-grid-list>
+          }
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button routerLink="/">Regresar</button>
+        <button 
+          mat-flat-button 
+          type="submit"
+          [disabled]="exportForm.invalid">Generar mensaje</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
