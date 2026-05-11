@@ -22,7 +22,7 @@
                 </div>
                 @for(value of repeatedItem.values; track $index){
                   <mat-chip-row (removed)="remove(getCode(repeatedItem.key), value)">
-                    {{ value }}
+                    {{ value + 1 }}
                     <button matChipRemove [attr.aria-label]="'remove ' + value">
                       <mat-icon>cancel</mat-icon>
                     </button>

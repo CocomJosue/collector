@@ -32,7 +32,7 @@
       <mat-label>Número</mat-label>
       <mat-select formControlName="selectedSticker">
         @for(number of numbers; track number){
-          <mat-option [value]="number">
+          <mat-option [value]="number - 1">
             {{ number }}
           </mat-option>
         }

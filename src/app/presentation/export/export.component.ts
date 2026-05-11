@@ -7,8 +7,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { Group } from '../../core/models/group.interface';
-import { GROUPS } from '../../drivers/const/const';
+import { COUNTRIES, GROUPS } from '../../drivers/const/const';
 import { Country } from '../../core/models/country.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-export',
@@ -33,6 +34,8 @@ export class ExportComponent {
   obtainedList: { key: string, values: number[] }[] = [];
   options: string[] = ['Todas', 'Grupo', 'Pais']
 
+  constructor(private _toastrService: ToastrService) {}
+
   ngOnInit() {
     this._initForm();
     this._subscribeToPageFormChanges();
@@ -55,6 +58,7 @@ export class ExportComponent {
       key,
       values: JSON.parse(localStorage.getItem(key) || '[]')
     }));
+    console.log('Repetidas', this.repeatedList);
   }
 
   private _loadObtainedStickersList() {
@@ -64,7 +68,7 @@ export class ExportComponent {
       key,
       values: JSON.parse(localStorage.getItem(key) || '[]')
     }));
-    console.log(this.obtainedList);
+    console.log('Obtenidas', this.obtainedList);
     
   }
 
@@ -91,11 +95,29 @@ export class ExportComponent {
   }
 
   submit() {
+    let message = '¡Hola, quiero intercambiar estampas! Tengo repetidas: ';
     if(this.exportForm.valid) {
       if(this.exportBy.value === 'Todas') {
-        
+        this.countries = COUNTRIES;
+        for(const repeatedList of this.repeatedList) {
+          if(repeatedList.values.length > 0) {
+            const code = repeatedList.key.replace('rep', '');
+            const country = this.countries.find(x => x.code == code);
+            if(country) {
+              message += `${country.name} - `;
+              for(const item of repeatedList.values) {
+                message += `${code}${item + 1}; `;
+              }
+            }
+          }
+        }
       }
     }
+    message += 'Estoy usando app-collector.netlify.app para completar mi clección.'
+    navigator.clipboard.writeText(message)
+    .then(() => {
+      this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos.');
+    })
   }
 
   get selectedGroup() {
