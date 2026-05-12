@@ -1,13 +1,13 @@
 import { Country } from "../../core/models/country.interface";
 import { Group } from "../../core/models/group.interface";
 
-export const TOTAL_COUNT = 960;
+export const TOTAL_COUNT = 994;
 
 export const APP_URL = 'https://app-collector.netlify.app/'
 
 export const GROUPS: Group[] = [
   { 
-    letter: 'A',
+    letter: 'Grupo A',
     countries: [
       { code: 'MEX', name: 'México', group: 'A' },
       { code: 'RSA', name: 'Sudáfrica', group: 'A' },
@@ -16,7 +16,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'B',
+    letter: 'Grupo B',
     countries: [
       { code: 'CAN', name: 'Canadá', group: 'B' },
       { code: 'BIH', name: 'Bosnia y Herzegovina', group: 'B' },
@@ -25,7 +25,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'C',
+    letter: 'Grupo C',
     countries: [
       { code: 'BRA', name: 'Brasil', group: 'C' },
       { code: 'MAR', name: 'Marruecos', group: 'C' },
@@ -34,7 +34,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'D',
+    letter: 'Grupo D',
     countries: [
       { code: 'USA', name: 'Estados Unidos', group: 'D' },
       { code: 'PAR', name: 'Paraguay', group: 'D' },
@@ -43,7 +43,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'E',
+    letter: 'Grupo E',
     countries: [
       { code: 'GER', name: 'Alemania', group: 'E' },
       { code: 'CUW', name: 'Curazao', group: 'E' },
@@ -52,7 +52,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'F',
+    letter: 'Grupo F',
     countries: [
       { code: 'NED', name: 'Países Bajos', group: 'F' },
       { code: 'JPN', name: 'Japón', group: 'F' },
@@ -61,7 +61,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'G',
+    letter: 'Grupo G',
     countries: [
       { code: 'BEL', name: 'Bélgica', group: 'G' },
       { code: 'EGY', name: 'Egipto', group: 'G' },
@@ -70,7 +70,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'H',
+    letter: 'Grupo H',
     countries: [
       { code: 'ESP', name: 'España', group: 'H' },
       { code: 'CPV', name: 'Cabo Verde', group: 'H' },
@@ -79,7 +79,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'I',
+    letter: 'Grupo I',
     countries: [
       { code: 'FRA', name: 'Francia', group: 'I' },
       { code: 'SEN', name: 'Senegal', group: 'I' },
@@ -88,7 +88,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'J',
+    letter: 'Grupo J',
     countries: [
       { code: 'ARG', name: 'Argentina', group: 'J' },
       { code: 'ALG', name: 'Argelia', group: 'J' },
@@ -97,7 +97,7 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'K',
+    letter: 'Grupo K',
     countries: [
       { code: 'POR', name: 'Portugal', group: 'K' },
       { code: 'COD', name: 'RD Congo', group: 'K' },
@@ -106,12 +106,19 @@ export const GROUPS: Group[] = [
     ]
   },
   { 
-    letter: 'L',
+    letter: 'Grupo L',
     countries: [
       { code: 'ENG', name: 'Inglaterra', group: 'L' },
       { code: 'CRO', name: 'Croacia', group: 'L' },
       { code: 'GHA', name: 'Ghana', group: 'L' },
       { code: 'PAN', name: 'Panamá', group: 'L' },
+    ]
+  },
+  {
+    letter: 'Especiales',
+    countries:[
+      { code: 'FWC', name: 'Fifa World Cup', group:'S' },
+      { code: 'CC', name: 'Coca-Cola', group:'S' },
     ]
   }
 ];
@@ -165,4 +172,6 @@ export const COUNTRIES: Country[] = [
   { code: 'CRO', name: 'Croacia', group: 'L' },
   { code: 'GHA', name: 'Ghana', group: 'L' },
   { code: 'PAN', name: 'Panamá', group: 'L' },
+  { code: 'FWC', name: 'Fifa World Cup', group:'S' },
+  { code: 'CC', name: 'Coca-Cola', group:'S' },
 ];

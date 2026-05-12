@@ -6,7 +6,7 @@
           <mat-label>Grupo</mat-label>
           <mat-select formControlName="selectedGroup">
             @for(group of groups; track $index){
-              <mat-option [value]="group">Group {{ group.letter }}</mat-option>
+              <mat-option [value]="group">{{ group.letter }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
@@ -17,14 +17,18 @@
           <mat-select formControlName="selectedCountry">
             <mat-select-trigger>
               <div class="selected">
-                <img width="32" [src]="getFlag(selectedCountry.value)">
+                @if(selectedGroup.value.letter !=='Especiales') {
+                  <img width="32" [src]="getFlag(selectedCountry.value)">
+                }
                 <span>{{ selectedCountry.value }}</span>
               </div>
             </mat-select-trigger>
             @for(country of countries; track $index){
               <mat-option [value]="country.code">
                 <div class="d-flex">
-                  <img width="32" [src]="getFlag(country.code)">
+                  @if(selectedGroup.value.letter !=='Especiales') {
+                    <img width="32" [src]="getFlag(country.code)">
+                  }
                   <span>{{ country.name }}</span>
                 </div>
               </mat-option>

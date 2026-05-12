@@ -62,11 +62,12 @@ export class ExportComponent {
 
   private _loadObtainedStickersList() {
     this.obtainedList = Object.keys(localStorage)
-    .filter(key => key.length === 3)
+    .filter(key => key.length < 4)
     .map(key => ({
       key,
       values: JSON.parse(localStorage.getItem(key) || '[]')
-    }));    
+    }));
+    console.log(this.obtainedList);
   }
 
   private _subscribeToPageFormChanges() {
