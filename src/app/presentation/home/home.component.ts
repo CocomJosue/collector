@@ -8,6 +8,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { ProgressComponent } from '../progress/progress.component';
 import { AlbumPageComponent } from '../album-page/album-page.component';
 import { RouterLink } from '@angular/router';
+import { Country } from '../../core/models/country.interface';
+import { COUNTRIES } from '../../drivers/const/const';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,7 @@ export class HomeComponent {
   actualUsername: string | null = "";
   actualGender: string | null = "";
   greeting: string = "";
+  countries: Country[] = COUNTRIES;
 
   ngOnInit() {
     this._initForm();
@@ -56,6 +59,10 @@ export class HomeComponent {
     if(this.welcomeForm.valid) {
       localStorage.setItem('username', this.username.value);
       localStorage.setItem('gender', this.gender.value);
+      for(const country of this.countries) {
+        const booleanArray: boolean[] = Array(20).fill(false);
+        localStorage.setItem(country.code, JSON.stringify(booleanArray));
+      }
       window.location.reload();
     }
   }
