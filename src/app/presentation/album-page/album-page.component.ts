@@ -10,7 +10,6 @@ import { Country } from '../../core/models/country.interface';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
 import { ProgressService } from '../../infrastructure/progress.service';
-import { RouterLink } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -66,6 +65,13 @@ export class AlbumPageComponent {
         const saved = localStorage.getItem(country);
         if(saved) {
           this.selectedStickers.setValue(JSON.parse(saved), { emitEvent: false });
+          if(country === 'CC') {
+            for(const [index, value] of this.selectedStickers.controls.entries()) {
+              if(index > 13) {
+                value.setValue(true, { emitEvent: false });
+              }
+            }
+          }
         } else {
           this.selectAll(false);
           this.selectAllControl.setValue(false);

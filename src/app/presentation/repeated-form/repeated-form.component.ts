@@ -56,6 +56,12 @@ export class RepeatedFormComponent {
         this.selectedSticker.setValue(0, { emitEvent: false });
       }
     });
+
+    this.selectedCountry.valueChanges.subscribe({
+      next: (country: string) => {
+        this.numbers = Array.from({ length: country === 'CC' ? 14 : 20 }, (_, i) => i + 1)
+      }
+    })
   }
 
   getFlag(code: string) {

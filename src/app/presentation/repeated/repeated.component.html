@@ -18,7 +18,9 @@
               <div class="country">
                 <div class="head-country">
                   <p>{{ getCode(repeatedItem.key) }}</p>
-                  <img width="32" [src]="getFlag(getCode(repeatedItem.key))">
+                  @if(repeatedItem.key !=='repCC') {
+                    <img width="32" [src]="getFlag(getCode(repeatedItem.key))">
+                  }
                 </div>
                 @for(value of repeatedItem.values; track $index){
                   <mat-chip-row (removed)="remove(getCode(repeatedItem.key), value)">

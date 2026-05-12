@@ -67,7 +67,6 @@ export class ExportComponent {
       key,
       values: JSON.parse(localStorage.getItem(key) || '[]')
     }));
-    console.log(this.obtainedList);
   }
 
   private _subscribeToPageFormChanges() {

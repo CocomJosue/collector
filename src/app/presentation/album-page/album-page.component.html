@@ -49,11 +49,33 @@
               Seleccionar todo</mat-checkbox>
           </div>
           <section formArrayName="selectedStickers">
-            @for(ctrl of selectedStickers.controls; track $index){
-              <mat-checkbox
-                [formControlName]="$index">
-                  {{ $index + 1}}
-              </mat-checkbox>
+            @if(selectedCountry.value === 'FWC') {
+              @for(ctrl of selectedStickers.controls; track $index){
+                <mat-checkbox
+                  [formControlName]="$index">
+                    @if($index === 0){
+                      00
+                    } @else {
+                      {{ $index }}
+                    }
+                </mat-checkbox>
+              }
+            } @else if (selectedCountry.value === 'CC') {
+              @for(ctrl of selectedStickers.controls; track $index){
+                @if($index < 14) {
+                  <mat-checkbox
+                    [formControlName]="$index">
+                      {{ $index + 1}}
+                  </mat-checkbox>
+                }
+              }
+            } @else {
+              @for(ctrl of selectedStickers.controls; track $index){
+                <mat-checkbox
+                  [formControlName]="$index">
+                    {{ $index + 1}}
+                </mat-checkbox>
+              }
             }
           </section>
         </div>
