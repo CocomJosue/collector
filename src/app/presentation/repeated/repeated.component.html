@@ -18,7 +18,7 @@
               <div class="country">
                 <div class="head-country">
                   <p>{{ getCode(repeatedItem.key) }}</p>
-                  @if(repeatedItem.key !=='repCC') {
+                  @if(repeatedItem.key !=='repCC' && repeatedItem.key !== 'repFWC') {
                     <img width="32" [src]="getFlag(getCode(repeatedItem.key))">
                   }
                 </div>

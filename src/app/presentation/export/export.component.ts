@@ -102,12 +102,19 @@ export class ExportComponent {
         if(country) {
           message += `\n${country.name} - `;
           for(const item of repeatedItem.values) {
-            message += `${code}${item + 1}; `;
+            if(repeatedItem.key === 'repFWC') {
+              if(item === 0)
+                message += `${repeatedItem.key}00; `;
+              else
+                message += `${repeatedItem.key}${item}; `;
+            } else {
+              message += `${code}${item + 1}; `;
+            }
           }
         }
       }
     }
-    message += '\nY estoy buscnado: ';
+    message += '\n\nY estoy buscnado: ';
     for(const obtainedItem of this.obtainedList) {
       const notObtained = obtainedItem.values
       .map((value, index) => !value ? index : -1)
@@ -117,12 +124,22 @@ export class ExportComponent {
         if(country) {
           message += `\n${country.name} - `;
           for(const item of notObtained) {
-            message += `${obtainedItem.key}${item + 1}; `;
+            if(obtainedItem.key === 'CC') {
+              if(item < 14)
+                message += `${obtainedItem.key}${item + 1}; `;
+            } else if(obtainedItem.key === 'FWC') {
+              if(item === 0)
+                message += `${obtainedItem.key}00; `;
+              else
+                message += `${obtainedItem.key}${item}; `;
+            } else {
+              message += `${obtainedItem.key}${item + 1}; `;
+            }
           }
         }
       }
     }
-    message += '\nEstoy usando app-collector para completar mi clección.\n¡Entra en el siguiente enlace para que la uses tú también!';
+    message += '\n\nEstoy usando app-collector para completar mi clección.\n¡Entra en el siguiente enlace para que la uses tú también!';
     message += `\n${APP_URL}`;
     navigator.clipboard.writeText(message)
     .then(() => {

@@ -37,7 +37,15 @@
       <mat-select formControlName="selectedSticker">
         @for(number of numbers; track number){
           <mat-option [value]="number - 1">
-            {{ number }}
+            @if(selectedCountry.value === 'FWC') {
+              @if(number === 1) {
+                <span>00</span>
+              } @else {
+                <span>{{ number - 1 }}</span>
+              }
+            } @else {
+              {{ number }}
+            }
           </mat-option>
         }
       </mat-select>
