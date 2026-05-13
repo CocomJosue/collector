@@ -94,8 +94,7 @@ export class RepeatedFormComponent {
             arrRepeats.push(this.selectedSticker.value);
             localStorage.setItem(`rep${this.selectedCountry.value}`, JSON.stringify(arrRepeats))
           }
-          this._toastrService.success('Estampa repetida guardada con éxito');
-          this.dialogRef.close();
+          this._toastrService.success('Estampa repetida guardada con éxito, puedes seguir registrando más estampas repetidas o cerrar este menú.');
         } else {
           this._toastrService.error('La estampa no está registrada, regresa al menú anterior');
         }
