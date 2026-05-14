@@ -118,7 +118,7 @@ export const GROUPS: Group[] = [
     letter: 'Especiales',
     countries:[
       { code: 'FWC', name: 'Fifa World Cup', group:'S' },
-      { code: 'CC', name: 'Coca-Cola', group:'S' },
+      { code: 'CC', name: 'Patrocinador Oficial', group:'S' },
     ]
   }
 ];
@@ -173,5 +173,5 @@ export const COUNTRIES: Country[] = [
   { code: 'GHA', name: 'Ghana', group: 'L' },
   { code: 'PAN', name: 'Panamá', group: 'L' },
   { code: 'FWC', name: 'Fifa World Cup', group:'S' },
-  { code: 'CC', name: 'Coca-Cola', group:'S' },
+  { code: 'CC', name: 'Patrocinador Oficial', group:'S' },
 ];
