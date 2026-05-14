@@ -10,6 +10,7 @@ import { AlbumPageComponent } from '../album-page/album-page.component';
 import { RouterLink } from '@angular/router';
 import { Country } from '../../core/models/country.interface';
 import { COUNTRIES } from '../../drivers/const/const';
+import { ImportProgressComponent } from '../import-progress/import-progress.component';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ import { COUNTRIES } from '../../drivers/const/const';
     MatButtonModule,
     ProgressComponent,
     AlbumPageComponent,
-    RouterLink
+    RouterLink,
+    ImportProgressComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

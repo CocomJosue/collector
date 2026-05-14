@@ -1,0 +1,25 @@
+<div class="container">
+  @if(checkData()) {
+    <button 
+      mat-mini-fab color="primary"
+      matTooltip="Descargar progreso"
+      (click)="exportLocalStorage()">
+      <mat-icon>file_download</mat-icon>
+    </button>
+  }
+
+  <button 
+    mat-mini-fab color="accent"
+    matTooltip="Cargar archivo de progreso"
+    (click)="fileInput.click()">
+    <mat-icon>upload_file</mat-icon>
+  </button>
+
+  <input
+    #fileInput
+    type="file"
+    accept=".json"
+    hidden
+    (change)="importLocalStorage($event)"
+  />
+</div>
