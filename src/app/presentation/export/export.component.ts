@@ -93,7 +93,7 @@ export class ExportComponent {
     return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
   }
 
-  private _generateMsg(countries: Country[]): string {
+  private _generateMsg(countries: Country[]) {
     let message = '¡Hola, quiero intercambiar estampas! Tengo repetidas:';
     for(const repeatedItem of this.repeatedList) {
       if(repeatedItem.values.length > 0) {
@@ -115,11 +115,13 @@ export class ExportComponent {
       }
     }
     message += '\n\nY estoy buscnado: ';
+    let canExchange = false;
     for(const obtainedItem of this.obtainedList) {
       const notObtained = obtainedItem.values
       .map((value, index) => !value ? index : -1)
       .filter(index => index !== -1);
       if(notObtained.length > 0) {
+        canExchange = true;
         const country = countries.find(x => x.code == obtainedItem.key);
         if(country) {
           message += `\n${country.name} - `;
@@ -141,11 +143,21 @@ export class ExportComponent {
     }
     message += '\n\nEstoy usando app-collector para completar mi clección.\n¡Entra en el siguiente enlace para que la uses tú también!';
     message += `\n${APP_URL}`;
-    navigator.clipboard.writeText(message)
-    .then(() => {
-      this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos.');
-    })
-    return message;
+    if(canExchange) {
+      navigator.clipboard.writeText(message)
+      .then(() => {
+        this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos. ¡Gracias por usar app-collector!');
+      })
+    }
+    else {
+      if(this.exportBy.value !== 'Todas')
+        this._toastrService.error(`Ya no hay más estampas por encontrar para este ${this.exportBy.value}`);
+      else
+        navigator.clipboard.writeText(`¡Conseguí todas las estamopas! Te recomiendo utilizar app-collector para que tú también las consigas.\n${APP_URL}`)
+        .then(() => {
+          this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos. ¡Gracias por usar app-collector!');
+        })
+    }
   }
 
   submit() {
