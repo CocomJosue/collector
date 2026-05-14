@@ -52,6 +52,16 @@ export class ImportProgressComponent {
     window.URL.revokeObjectURL(url);
   }
 
+  confirmImport(fileInput: HTMLInputElement): void {
+    const confirmed = confirm(
+      '¿Estás seguro de importar este archivo? Esto podría sobrescribir el progreso actual.'
+    );
+
+    if (confirmed) {
+      fileInput.click();
+    }
+  }
+
   importLocalStorage(event: Event): void {
     const input = event.target as HTMLInputElement;
 
