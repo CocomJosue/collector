@@ -4,7 +4,7 @@ mat-card {
 
 .principal {
   display: flex;
-  height: 100dvh;
+  height: 93dvh;
   align-items: center;
   justify-content: center;
 }
@@ -12,7 +12,7 @@ mat-card {
 .welcome-content {
   padding-block: 15px;
   max-width: 80vw;
-  max-height: 65vh;
+  max-height: 52vh;
   overflow-y: auto;
 }
 
@@ -46,4 +46,14 @@ mat-card-subtitle {
 
 button {
   margin-left: 10px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+h3 {
+  font-size: 16pt;
+  margin: 0;
 }

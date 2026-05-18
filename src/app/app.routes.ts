@@ -16,4 +16,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./presentation/export/export.component').then((m) => m.ExportComponent),
   },
+  {
+    path: 'about',
+    loadComponent: () =>
+      import('./presentation/about/about.component').then((m) => m.AboutComponent),
+  },
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('./presentation/contact/contact.component').then((m) => m.ContactComponent),
+  },
 ];

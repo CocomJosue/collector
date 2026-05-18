@@ -114,7 +114,7 @@ export class ExportComponent {
         }
       }
     }
-    message += '\n\nY estoy buscnado: ';
+    message += '\n\nY estoy buscando: ';
     let canExchange = false;
     for(const obtainedItem of this.obtainedList) {
       const notObtained = obtainedItem.values
