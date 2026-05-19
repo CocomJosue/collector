@@ -1,23 +1,26 @@
 mat-card {
-  background-color: rgba(255, 255, 255, 0.8)
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: #063606;
 }
 
 .principal {
   display: flex;
-  height: 100dvh;
+  height: 93dvh;
   align-items: center;
   justify-content: center;
 }
 
 .repeated-content {
   padding-block: 15px;
-  max-width: 90vw;
-  max-height: 65vh;
+  max-width: 80vw;
+  max-height: 52vh;
   overflow-y: auto;
 }
 
 mat-card-title {
   margin-bottom: 15px;
+  color:#063606;
+  font-weight: bold;
 }
 
 mat-card-subtitle {
@@ -30,7 +33,7 @@ button {
 }
 
 .country {
-  border: 1px solid #000;
+  border: 1px solid #095709;
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 10px;
@@ -45,4 +48,30 @@ button {
 
 mat-chip-row {
   margin-left: 5px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  background-color: #095709;
+  color: #fff;
+  border: 1px solid #095709;
+}
+
+h3 {
+  font-size: 16pt;
+  margin: 0;
+}
+
+button.link-button {
+  color: #8de08d;
+}
+
+button.add {
+  background-color: #095709;
+  color: #fff;
+}
+
+button.back {
+  color: #095709;
 }

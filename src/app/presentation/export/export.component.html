@@ -1,3 +1,16 @@
+<div class="info">
+  <button
+    mat-button 
+    type="button"
+    class="link-button"
+    routerLink="/about">About</button>
+  <h3>App Collector</h3>
+  <button
+    mat-button
+    type="button"
+    class="link-button"
+    routerLink="/contact">Contact</button>
+</div>
 <div class="principal">
   <form [formGroup]="exportForm" (ngSubmit)="submit()">
     <mat-card appearance="outlined">
@@ -69,10 +82,12 @@
       <mat-card-actions align="end">
         <button 
           mat-button 
+          class="back"
           routerLink="/"
           type="button">Regresar</button>
         <button 
           mat-flat-button 
+          class="add"
           type="submit"
           [disabled]="exportForm.invalid">Generar mensaje</button>
       </mat-card-actions>

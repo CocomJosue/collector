@@ -53,10 +53,12 @@
     <div class="actions">
       <button
         mat-button 
+        class="back"
         type="button"
         (click)="cancelAction()">Cerrar</button>
       <button
         mat-flat-button 
+        class="add"
         cdkFocusInitial 
         type="submit"
         [disabled]="repeatedForm.invalid">Guardar</button>

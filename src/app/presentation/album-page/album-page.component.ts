@@ -62,6 +62,7 @@ export class AlbumPageComponent {
 
     this.selectedCountry.valueChanges.subscribe({
       next: (country: string) => {
+        this.selectAllControl.setValue(false);
         const saved = localStorage.getItem(country);
         if(saved) {
           this.selectedStickers.setValue(JSON.parse(saved), { emitEvent: false });

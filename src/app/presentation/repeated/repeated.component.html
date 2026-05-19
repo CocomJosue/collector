@@ -1,3 +1,16 @@
+<div class="info">
+  <button
+    mat-button 
+    type="button"
+    class="link-button"
+    routerLink="/about">About</button>
+  <h3>App Collector</h3>
+  <button
+    mat-button
+    type="button"
+    class="link-button"
+    routerLink="/contact">Contact</button>
+</div>
 <div class="principal">
   <mat-card appearance="outlined">
     <mat-card-header>
@@ -23,9 +36,10 @@
                   }
                 </div>
                 @for(value of repeatedItem.values; track $index){
-                  <mat-chip-row (removed)="remove(getCode(repeatedItem.key), value)">
+                  <mat-chip-row
+                    (removed)="remove(getCode(repeatedItem.key), value)">
                     {{ value + 1 }}
-                    <button matChipRemove [attr.aria-label]="'remove ' + value">
+                    <button matChipRemove [attr.aria-label]="'remove ' + value" class="chip">
                       <mat-icon>cancel</mat-icon>
                     </button>
                   </mat-chip-row>
@@ -37,8 +51,14 @@
       </div>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-button routerLink="/">Regresar</button>
-      <button mat-flat-button (click)="openDialog()">Agregar</button>
+      <button
+        mat-button 
+        class="back"
+        routerLink="/">Regresar</button>
+      <button
+        mat-flat-button
+        class="add"
+        (click)="openDialog()">Agregar</button>
     </mat-card-actions>
   </mat-card>
 </div>

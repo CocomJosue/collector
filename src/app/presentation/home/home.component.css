@@ -1,5 +1,6 @@
 mat-card {
-  background-color: rgba(255, 255, 255, 0.8)
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: #063606;
 }
 
 .principal {
@@ -18,6 +19,8 @@ mat-card {
 
 mat-card-title {
   margin-bottom: 15px;
+  color:#063606;
+  font-weight: bold;
 }
 
 mat-card-subtitle {
@@ -51,9 +54,20 @@ button {
 .info {
   display: flex;
   justify-content: space-between;
+  background-color: #095709;
+  color: #fff;
+  border: 1px solid #095709;
 }
 
 h3 {
   font-size: 16pt;
   margin: 0;
+}
+
+button.link-button {
+  color: #8de08d;
+}
+
+button.link {
+  color:#095709;
 }
