@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
+import { DIF_CHANNEL } from '../../drivers/const/const';
 
 @Component({
   selector: 'app-about',
@@ -15,5 +16,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './about.component.css'
 })
 export class AboutComponent {
-
+    difChannel = DIF_CHANNEL;
 }

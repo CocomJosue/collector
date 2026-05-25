@@ -7,6 +7,8 @@ export const APP_URL = 'https://app-collector.netlify.app/'
 
 export const MAIL_ADDRESS = 'support+jcervantesc98@gmail.com';
 
+export const DIF_CHANNEL = 'https://whatsapp.com/channel/0029VbCKSQ27NoZsfRFfRD0w';
+
 export const GROUPS: Group[] = [
   { 
     letter: 'Grupo A',

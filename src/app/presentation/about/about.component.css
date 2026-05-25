@@ -1,6 +1,6 @@
 .principal {
   display: flex;
-  height: 93dvh;
+  height: 100dvh;
   align-items: center;
   justify-content: center;
 }
@@ -8,7 +8,7 @@
 .welcome-content {
   padding-block: 15px;
   max-width: 80vw;
-  max-height: 52vh;
+  max-height: 65vh;
   overflow-y: auto;
 }
 
