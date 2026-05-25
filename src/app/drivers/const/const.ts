@@ -5,6 +5,8 @@ export const TOTAL_COUNT = 994;
 
 export const APP_URL = 'https://app-collector.netlify.app/'
 
+export const MAIL_ADDRESS = 'support+jcervantesc98@gmail.com';
+
 export const GROUPS: Group[] = [
   { 
     letter: 'Grupo A',

@@ -1,0 +1,33 @@
+.principal {
+  display: flex;
+  height: 93dvh;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-content {
+  padding-block: 15px;
+  max-width: 80vw;
+  max-height: 52vh;
+  overflow-y: auto;
+}
+
+mat-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: #063606;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+  color:#063606;
+  font-weight: bold;
+}
+
+mat-card-subtitle {
+  max-width: 80vw;
+  text-align: justify;
+}
+
+p{
+  text-align: justify;
+}

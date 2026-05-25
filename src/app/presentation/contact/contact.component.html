@@ -1,1 +1,29 @@
-<p>contact works!</p>
+<div class="principal">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Contacto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="welcome-content">
+        <p>
+          Si tienes preguntas, sugerencias, encontraste algún error o deseas
+          compartir ideas para mejorar la aplicación, puedes ponerte en contacto.
+        </p>
+        <div class="contact-box">
+          <p>
+            📧 Correo:
+          </p>
+          <a href="mailto:tu-correo@email.com">
+            {{ mailAddress }}
+          </a>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button 
+        class="link"
+        mat-stroked-button
+        routerLink="/">Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
