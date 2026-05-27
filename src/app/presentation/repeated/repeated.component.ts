@@ -26,6 +26,7 @@ export class RepeatedComponent {
   groups = GROUPS;
   readonly dialog = inject(MatDialog);
   repeatedList: { key: string, values: number[] }[] = [];
+  totalRepeatedCount = 0;
 
   constructor(private _toastrService: ToastrService) {}
 
@@ -40,6 +41,16 @@ export class RepeatedComponent {
       key,
       values: JSON.parse(localStorage.getItem(key) || '[]')
     }));
+
+    this._calculateTotalCount();
+  }
+
+  private _calculateTotalCount() {
+    let count = 0;
+    for(const repeatedItem of this.repeatedList) {
+      count += repeatedItem.values.length;
+    }
+    this.totalRepeatedCount = count;
   }
 
   getFlag(code: string) {

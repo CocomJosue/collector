@@ -24,7 +24,9 @@
               </div>
             </mat-select-trigger>
             @for(country of countries; track $index){
-              <mat-option [value]="country.code">
+              <mat-option
+                [value]="country.code"
+                [style.background]="getBackground(country.code)">
                 <div class="d-flex">
                   @if(selectedGroup.value.letter !=='Especiales') {
                     <img width="32" [src]="getFlag(country.code)">

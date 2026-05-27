@@ -85,6 +85,27 @@ export class AlbumPageComponent {
     return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
   }
 
+  getPercentage(code: string): number {
+    const count = localStorage.getItem(`count${code}`);
+    if(count) {
+      const numberCount = Number(count);
+      if(code != 'CC' && code != 'FWC')
+        return Math.round(numberCount / 20 * 100);
+      else
+        return Math.round(numberCount / 14 * 100);
+    }
+    return 0;
+  }
+
+  getBackground(code: string): string {
+    const startFade = Math.max(0, this.getPercentage(code));
+    return `linear-gradient(
+      to right,
+      #d7f3d7 ${startFade}%,
+      rgba(141,224,141,0) ${this.getPercentage(code)}%
+    )`;
+  }
+
   selectAll(actual: boolean) {
     for(const control of this.selectedStickers.controls) {
       control.setValue(actual, { emitEvent: false });
