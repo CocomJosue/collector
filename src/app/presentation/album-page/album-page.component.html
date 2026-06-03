@@ -37,6 +37,14 @@
             }
           </mat-select>
         </mat-form-field>
+        <button 
+          class="search-button"
+          mat-mini-fab color="primary"
+          matTooltip="Descargar progreso"
+          type="button"
+          (click)="searchCountry()">
+          <mat-icon>search</mat-icon>
+        </button>
       </mat-grid-tile>
     </mat-grid-list>
     @if(selectedGroup.value !== '' && selectedCountry.value != '') {

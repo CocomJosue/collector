@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { ProgressService } from '../../infrastructure/progress.service';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({

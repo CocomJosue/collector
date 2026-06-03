@@ -8,9 +8,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { Country } from '../../core/models/country.interface';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { ProgressService } from '../../infrastructure/progress.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-album-page',
@@ -22,7 +25,11 @@ import { ToastrService } from 'ngx-toastr';
     MatInputModule,
     MatGridListModule,
     MatCheckbox,
-    MatButton
+    MatButton,
+    MatButtonModule,
+    MatIcon,
+    MatTooltipModule,
+    CommonModule
 ],
   templateUrl: './album-page.component.html',
   styleUrl: './album-page.component.css'
@@ -79,6 +86,10 @@ export class AlbumPageComponent {
         }
       }
     });
+  }
+
+  searchCountry() {
+    
   }
 
   getFlag(code: string) {
