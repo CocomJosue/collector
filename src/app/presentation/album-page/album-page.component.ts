@@ -14,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
+import { SearchCountryComponent } from '../search-country/search-country.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-album-page',
@@ -36,6 +38,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AlbumPageComponent {
   progressService = inject(ProgressService);
+  readonly dialog = inject(MatDialog);
   pageForm!: FormGroup;
   groups: Group[] = GROUPS;
   countries: Country[] = [];
@@ -89,7 +92,19 @@ export class AlbumPageComponent {
   }
 
   searchCountry() {
-    
+    this.selectedCountry.setValue('');
+    this.selectedGroup.setValue('');
+    this.pageForm.updateValueAndValidity();
+    const dialogRef = this.dialog.open(SearchCountryComponent, { });
+
+    dialogRef.afterClosed().subscribe((result: Country | undefined ) => {
+      if(result != undefined) {
+        const group = this.groups.find(group => group.letter === `Grupo ${result.group}`);
+        this.selectedGroup.setValue(group);
+        this.selectedCountry.setValue(result.code);
+        this.pageForm.updateValueAndValidity();
+      }
+    });
   }
 
   getFlag(code: string) {

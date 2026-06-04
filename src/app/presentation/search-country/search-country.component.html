@@ -1,6 +1,24 @@
-<h2 mat-dialog-title>Agregar una estampa repetida</h2>
+<h2 mat-dialog-title>Buscar país</h2>
 <mat-dialog-content>
-  <form [formGroup]="searchForm" (ngSubmit)="submit()">
-    
-  </form>
+  <mat-form-field appearance="outline" class="pd-2">
+  <mat-label>Country</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="countryControl"
+    [matAutocomplete]="auto">
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayCountry">
+
+    @for (country of filteredCountries$ | async; track country.code) {
+      <mat-option
+        [value]="country"
+        (onSelectionChange)="onCountrySelected(country)">
+        {{ country.code }} - {{ country.name }}
+      </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>
 </mat-dialog-content>

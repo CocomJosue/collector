@@ -105,14 +105,14 @@ export class RepeatedFormComponent {
   }
 
   get selectedGroup() {
-      return this.repeatedForm.get('selectedGroup') as FormControl;
-    }
-  
-    get selectedCountry() {
-      return this.repeatedForm.get('selectedCountry') as FormControl;
-    }
-  
-    get selectedSticker() {
-      return this.repeatedForm.get('selectedSticker') as FormControl;
-    }
+    return this.repeatedForm.get('selectedGroup') as FormControl;
+  }
+
+  get selectedCountry() {
+    return this.repeatedForm.get('selectedCountry') as FormControl;
+  }
+
+  get selectedSticker() {
+    return this.repeatedForm.get('selectedSticker') as FormControl;
+  }
 }
