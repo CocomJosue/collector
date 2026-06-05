@@ -4,5 +4,8 @@
     [mode]="mode"
     [value]="progressService.progress()">
   </mat-progress-spinner>
-  <h3>{{ progressService.progress() }}%</h3>
+  <div class="percentage">
+    <h3>{{ progressService.progress() }}%</h3>
+  </div>
+  <h4>{{ progressService.totalCount() }} / {{ goal }}</h4>
 </div>

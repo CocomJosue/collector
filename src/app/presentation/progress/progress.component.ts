@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ProgressService } from '../../infrastructure/progress.service';
+import { TOTAL_COUNT } from '../../drivers/const/const';
 
 @Component({
   selector: 'app-progress',
@@ -14,6 +15,7 @@ import { ProgressService } from '../../infrastructure/progress.service';
 export class ProgressComponent {
   progressService = inject(ProgressService);
   mode: ProgressSpinnerMode = 'determinate';
+  goal: number = TOTAL_COUNT;
 
   ngOnInit() {
     this.progressService.calculateProgress();

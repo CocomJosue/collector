@@ -33,7 +33,7 @@
             @if(repeatedItem.values.length > 0) {
               <div class="country">
                 <div class="head-country">
-                  <p>{{ getCode(repeatedItem.key) }}({{ repeatedItem.values.length }})</p>
+                  <p>{{ getCode(repeatedItem.key) }} ({{ repeatedItem.values.length }})</p>
                   @if(repeatedItem.key !=='repCC' && repeatedItem.key !== 'repFWC') {
                     <img width="32" [src]="getFlag(getCode(repeatedItem.key))">
                   }
