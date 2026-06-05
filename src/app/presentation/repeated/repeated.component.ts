@@ -35,13 +35,16 @@ export class RepeatedComponent {
   }
 
   private _loadRepeatedStickersList() {
-    this.repeatedList = Object.keys(localStorage)
-    .filter(key => key.startsWith('rep'))
-    .map(key => ({
-      key,
-      values: JSON.parse(localStorage.getItem(key) || '[]')
-    }));
-
+    this.repeatedList = [];
+    for(const group of this.groups) {
+      for(const country of group.countries){
+        const code = `rep${country.code}`;
+        const repArray = localStorage.getItem(code);
+        if(repArray !== null) {
+          this.repeatedList.push({ key: code, values: JSON.parse(repArray) });
+        }
+      }
+    }
     this._calculateTotalCount();
   }
 

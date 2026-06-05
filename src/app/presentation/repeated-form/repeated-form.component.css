@@ -1,5 +1,11 @@
 .form-field {
   width: 90%;
+  margin-top: 5px;
+}
+
+.form-field-sm {
+  width: 80%;
+  margin-top: 5px;
 }
 
 .d-flex {

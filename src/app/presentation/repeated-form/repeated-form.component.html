@@ -9,7 +9,7 @@
         }
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="form-field" appearance="outline">
+    <mat-form-field class="form-field-sm" appearance="outline">
       <mat-label>País</mat-label>
       <mat-select formControlName="selectedCountry">
         <mat-select-trigger>
@@ -32,6 +32,14 @@
         }
       </mat-select>
     </mat-form-field>
+    <button 
+      class="search-button"
+      mat-mini-fab color="primary"
+      matTooltip="Buscar país"
+      type="button"
+      (click)="searchCountry()">
+      <mat-icon>search</mat-icon>
+    </button>
     <mat-form-field appearance="outline">
       <mat-label>Número</mat-label>
       <mat-select formControlName="selectedSticker">

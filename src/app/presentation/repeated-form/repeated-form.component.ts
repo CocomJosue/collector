@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogTitle, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatDialogTitle, MatDialogContent, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Group } from '../../core/models/group.interface';
@@ -9,6 +9,8 @@ import { Country } from '../../core/models/country.interface';
 import { GROUPS } from '../../drivers/const/const';
 import { ToastrService } from 'ngx-toastr';
 import { MatSelectModule } from '@angular/material/select';
+import { SearchCountryComponent } from '../search-country/search-country.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-repeated-form',
@@ -17,11 +19,13 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatButton,
     MatButtonModule,
     MatDialogTitle,
     MatDialogContent,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIcon
 ],
   templateUrl: './repeated-form.component.html',
   styleUrl: './repeated-form.component.css'
@@ -29,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 export class RepeatedFormComponent {
   readonly dialogRef = inject(MatDialogRef<RepeatedFormComponent>);
   repeatedForm!: FormGroup;
+  readonly dialog = inject(MatDialog);
   groups: Group[] = GROUPS;
   countries: Country[] = [];
   numbers = Array.from({ length: 20 }, (_, i) => i + 1);
@@ -66,6 +71,22 @@ export class RepeatedFormComponent {
 
   getFlag(code: string) {
     return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
+  }
+
+  searchCountry() {
+    this.selectedCountry.setValue('');
+    this.selectedGroup.setValue('');
+    this.repeatedForm.updateValueAndValidity();
+    const dialogRef = this.dialog.open(SearchCountryComponent, { });
+
+    dialogRef.afterClosed().subscribe((result: Country | undefined ) => {
+      if(result != undefined) {
+        const group = this.groups.find(group => group.letter === `Grupo ${result.group}`);
+        this.selectedGroup.setValue(group);
+        this.selectedCountry.setValue(result.code);
+        this.repeatedForm.updateValueAndValidity();
+      }
+    });
   }
   
   cancelAction() {
