@@ -10,7 +10,8 @@
 
   <mat-autocomplete
     #auto="matAutocomplete"
-    [displayWith]="displayCountry">
+    [displayWith]="displayCountry"
+    autoActiveFirstOption>
 
     @for (country of filteredCountries$ | async; track country.code) {
       <mat-option
