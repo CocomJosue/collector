@@ -2,6 +2,10 @@
   width: 90%;
 }
 
+.form-field-lg {
+  width: 100%;
+}
+
 .d-flex {
   display: flex;
   justify-content: center;
@@ -39,6 +43,6 @@ button {
   margin-left: 5px;
 }
 
-.search-button {
-  margin-top: -25px;
+.p2 {
+  padding: 0% 5%;
 }

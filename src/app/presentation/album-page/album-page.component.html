@@ -1,52 +1,50 @@
 <div>
   <form [formGroup]="pageForm" (ngSubmit)="submit()">
-    <mat-grid-list cols="2" rowHeight="100px">
-      <mat-grid-tile>
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Grupo</mat-label>
-          <mat-select formControlName="selectedGroup">
-            @for(group of groups; track $index){
-              <mat-option [value]="group">{{ group.letter }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>País</mat-label>
-          <mat-select formControlName="selectedCountry">
-            <mat-select-trigger>
-              <div class="selected">
+    <div class="d-flex">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Grupo</mat-label>
+        <mat-select formControlName="selectedGroup">
+          @for(group of groups; track $index){
+            <mat-option [value]="group">{{ group.letter }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="space-between p2">
+      <mat-form-field class="form-field-lg" appearance="outline">
+        <mat-label>País</mat-label>
+        <mat-select formControlName="selectedCountry">
+          <mat-select-trigger>
+            <div class="selected">
+              @if(selectedGroup.value.letter !=='Especiales') {
+                <img height="21" width="32" [src]="getFlag(selectedCountry.value)">
+              }
+              <span>{{ selectedCountry.value }}</span>
+            </div>
+          </mat-select-trigger>
+          @for(country of countries; track $index){
+            <mat-option
+              [value]="country.code"
+              [style.background]="getBackground(country.code)">
+              <div class="d-flex">
                 @if(selectedGroup.value.letter !=='Especiales') {
-                  <img width="32" [src]="getFlag(selectedCountry.value)">
+                  <img height="21" width="32" [src]="getFlag(country.code)">
                 }
-                <span>{{ selectedCountry.value }}</span>
+                <span>{{ country.name }}</span>
               </div>
-            </mat-select-trigger>
-            @for(country of countries; track $index){
-              <mat-option
-                [value]="country.code"
-                [style.background]="getBackground(country.code)">
-                <div class="d-flex">
-                  @if(selectedGroup.value.letter !=='Especiales') {
-                    <img width="32" [src]="getFlag(country.code)">
-                  }
-                  <span>{{ country.name }}</span>
-                </div>
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        <button 
-          class="search-button"
-          mat-mini-fab color="primary"
-          matTooltip="Buscar país"
-          type="button"
-          (click)="searchCountry()">
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-grid-tile>
-    </mat-grid-list>
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <button
+        class="search-button"
+        mat-mini-fab color="primary"
+        matTooltip="Buscar país"
+        type="button"
+        (click)="searchCountry()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
     @if(selectedGroup.value !== '' && selectedCountry.value != '') {
       <div class="d-flex">
         <div class="album-page">

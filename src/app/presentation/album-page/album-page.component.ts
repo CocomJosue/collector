@@ -25,7 +25,6 @@ import { MatDialog } from '@angular/material/dialog';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatGridListModule,
     MatCheckbox,
     MatButton,
     MatButtonModule,

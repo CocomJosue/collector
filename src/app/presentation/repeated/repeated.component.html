@@ -35,7 +35,7 @@
                 <div class="head-country">
                   <p>{{ getCode(repeatedItem.key) }} ({{ repeatedItem.values.length }})</p>
                   @if(repeatedItem.key !=='repCC' && repeatedItem.key !== 'repFWC') {
-                    <img width="32" [src]="getFlag(getCode(repeatedItem.key))">
+                    <img height="21" width="32" [src]="getFlag(getCode(repeatedItem.key))">
                   }
                 </div>
                 @for(value of repeatedItem.values; track $index){
