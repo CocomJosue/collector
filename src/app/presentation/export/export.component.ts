@@ -32,7 +32,8 @@ export class ExportComponent {
   countries: Country[] = [];
   repeatedList: { key: string, values: number[] }[] = [];
   obtainedList: { key: string, values: number[] }[] = [];
-  options: string[] = ['Todas', 'Grupo', 'Pais']
+  options: string[] = ['Todas', 'Grupo', 'Pais'];
+  showSection = false;
 
   constructor(private _toastrService: ToastrService) {}
 
@@ -58,6 +59,11 @@ export class ExportComponent {
       key,
       values: JSON.parse(localStorage.getItem(key) || '[]')
     }));
+    for(const repeatedItem of this.repeatedList) {
+      if(repeatedItem.values.length > 0) {
+        this.showSection = true;
+      }
+    }
   }
 
   private _loadObtainedStickersList() {

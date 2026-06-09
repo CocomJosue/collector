@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { GROUPS } from '../../drivers/const/const';
+import { GROUPS, IMG_URL } from '../../drivers/const/const';
 import { Group } from '../../core/models/group.interface';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { Country } from '../../core/models/country.interface';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton, MatButtonModule } from '@angular/material/button';
@@ -38,6 +37,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AlbumPageComponent {
   progressService = inject(ProgressService);
   readonly dialog = inject(MatDialog);
+  readonly imgUrl: string = IMG_URL;
   pageForm!: FormGroup;
   groups: Group[] = GROUPS;
   countries: Country[] = [];
@@ -104,10 +104,6 @@ export class AlbumPageComponent {
         this.pageForm.updateValueAndValidity();
       }
     });
-  }
-
-  getFlag(code: string) {
-    return `https://api.fifa.com/api/v3/picture/flags-sq-1/${code}`;
   }
 
   getPercentage(code: string): number {

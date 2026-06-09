@@ -24,7 +24,7 @@
       </mat-card-header>
       <mat-card-content>
         <div class="repeated-content">
-          @if(repeatedList.length < 1) {
+          @if(showSection === false) {
             <p>Aún no tienes estampas repetidas</p>
           } @else {
             <mat-form-field class="form-field" appearance="outline">

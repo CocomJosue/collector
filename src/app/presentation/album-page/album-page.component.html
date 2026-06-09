@@ -17,7 +17,7 @@
           <mat-select-trigger>
             <div class="selected">
               @if(selectedGroup.value.letter !=='Especiales') {
-                <img height="21" width="32" [src]="getFlag(selectedCountry.value)">
+                <img height="21" width="32" [src]="imgUrl + selectedCountry.value">
               }
               <span>{{ selectedCountry.value }}</span>
             </div>
@@ -28,7 +28,7 @@
               [style.background]="getBackground(country.code)">
               <div class="d-flex">
                 @if(selectedGroup.value.letter !=='Especiales') {
-                  <img height="21" width="32" [src]="getFlag(country.code)">
+                  <img height="21" width="32" [src]="imgUrl + country.code">
                 }
                 <span>{{ country.name }}</span>
               </div>

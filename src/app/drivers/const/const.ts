@@ -9,6 +9,8 @@ export const MAIL_ADDRESS = 'support+jcervantesc98@gmail.com';
 
 export const DIF_CHANNEL = 'https://whatsapp.com/channel/0029VbCKSQ27NoZsfRFfRD0w';
 
+export const IMG_URL = 'https://api.fifa.com/api/v3/picture/flags-sq-1/';
+
 export const GROUPS: Group[] = [
   { 
     letter: 'Grupo A',
