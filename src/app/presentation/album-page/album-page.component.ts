@@ -46,6 +46,7 @@ export class AlbumPageComponent {
   ngOnInit() {
     this._initForm();
     this._subscribeToPageFormChanges();
+    this.selectedGroup.setValue(this.groups.at(0));
   }
 
   private _initForm() {
@@ -68,7 +69,6 @@ export class AlbumPageComponent {
             this.selectedCountry.setValue(group.countries[0].code);
           else
             this.selectedCountry.setValue(null);
-          this.selectAll(false);
         } else
           this.selectedCountry.disable();
       }
@@ -80,7 +80,10 @@ export class AlbumPageComponent {
           this.selectAllControl.setValue(false);
           const saved = localStorage.getItem(country);
           if(saved) {
-            this.selectedStickers.setValue(JSON.parse(saved));
+            this.pageForm.patchValue({
+              selectedStickers: JSON.parse(saved)
+            });
+            this.pageForm.updateValueAndValidity();
             if(country === 'CC') {
               for(const [index, value] of this.selectedStickers.controls.entries()) {
                 if(index > 13) {
@@ -125,10 +128,10 @@ export class AlbumPageComponent {
     const count = localStorage.getItem(`count${code}`);
     if(count) {
       const numberCount = Number(count);
-      if(code != 'CC' && code != 'FWC')
+      if(code != 'CC')
         return Math.round(numberCount / 20 * 100);
       else
-        return Math.round(numberCount / 14 * 100);
+        return Math.round((numberCount - 6) / 14 * 100);
     }
     return 0;
   }
