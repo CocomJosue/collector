@@ -29,7 +29,6 @@ import { ToastrService } from 'ngx-toastr';
 export class ExportComponent {
   exportForm!: FormGroup;
   groups: Group[] = GROUPS;
-  countries: Country[] = [];
   repeatedList: { key: string, values: number[] }[] = [];
   obtainedList: { key: string, values: number[] }[] = [];
   options: string[] = ['Todas', 'Grupo', 'Pais'];
@@ -47,8 +46,8 @@ export class ExportComponent {
   private _initForm() {
     this.exportForm = new FormGroup({
       exportBy: new FormControl<string>('', [Validators.required]),
-      selectedGroup: new FormControl<string | Group>('', []),
-      selectedCountry: new FormControl<string>('', []),
+      selectedGroup: new FormControl<Group | null>(null, []),
+      selectedCountry: new FormControl<string | null>(null, []),
     });
   }
 
@@ -88,9 +87,15 @@ export class ExportComponent {
     });
 
     this.selectedGroup.valueChanges.subscribe({
-      next: (group: Group) => {
-        this.countries = group.countries;
-        this.selectedCountry.setValue('', { emitEvent: false });
+      next: group => {
+        if(group !== null) {
+          this.selectedCountry.enable();
+          if (group?.countries?.length)
+            this.selectedCountry.setValue(group.countries[0].code);
+          else
+            this.selectedCountry.setValue(null);
+        } else
+          this.selectedCountry.disable();
       }
     });
   }
@@ -172,7 +177,7 @@ export class ExportComponent {
         this._generateMsg(COUNTRIES);
       } else if(this.exportBy.value === 'Grupo') {
         if(this.selectedGroup.value !== '') {
-          this._generateMsg(this.countries);
+          this._generateMsg(this.selectedGroup.value?.countries);
         }
       } else if(this.exportBy.value === 'Pais') {
         if(this.selectedGroup.value !== ''

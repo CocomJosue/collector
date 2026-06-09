@@ -40,7 +40,6 @@ export class AlbumPageComponent {
   readonly imgUrl: string = IMG_URL;
   pageForm!: FormGroup;
   groups: Group[] = GROUPS;
-  countries: Country[] = [];
 
   constructor(private _toastrService: ToastrService) {}
 
@@ -51,8 +50,8 @@ export class AlbumPageComponent {
 
   private _initForm() {
     this.pageForm = new FormGroup({
-      selectedGroup: new FormControl<string | Group>('', [Validators.required]),
-      selectedCountry: new FormControl<string>('', [Validators.required]),
+      selectedGroup: new FormControl<Group | null>(null, [Validators.required]),
+      selectedCountry: new FormControl<string | null>({value: null, disabled: true}, [Validators.required]),
       selectedStickers: new FormArray(
         Array.from({ length: 20 }, () => new FormControl(false))
       ),
@@ -62,46 +61,62 @@ export class AlbumPageComponent {
 
   private _subscribeToPageFormChanges() {
     this.selectedGroup.valueChanges.subscribe({
-      next: (group: Group) => {
-        this.countries = group.countries;
-        this.selectedCountry.setValue('', { emitEvent: false });
-        this.selectAll(false);
+      next: group => {
+        if(group !== null) {
+          this.selectedCountry.enable();
+          if (group?.countries?.length)
+            this.selectedCountry.setValue(group.countries[0].code);
+          else
+            this.selectedCountry.setValue(null);
+          this.selectAll(false);
+        } else
+          this.selectedCountry.disable();
       }
     });
 
     this.selectedCountry.valueChanges.subscribe({
-      next: (country: string) => {
-        this.selectAllControl.setValue(false);
-        const saved = localStorage.getItem(country);
-        if(saved) {
-          this.selectedStickers.setValue(JSON.parse(saved), { emitEvent: false });
-          if(country === 'CC') {
-            for(const [index, value] of this.selectedStickers.controls.entries()) {
-              if(index > 13) {
-                value.setValue(true, { emitEvent: false });
+      next: country => {
+        if(country !== null) {
+          this.selectAllControl.setValue(false);
+          const saved = localStorage.getItem(country);
+          if(saved) {
+            this.selectedStickers.setValue(JSON.parse(saved));
+            if(country === 'CC') {
+              for(const [index, value] of this.selectedStickers.controls.entries()) {
+                if(index > 13) {
+                  value.setValue(true);
+                }
               }
             }
+          } else {
+            this.selectAll(false);
+            this.selectAllControl.setValue(false);
           }
-        } else {
-          this.selectAll(false);
-          this.selectAllControl.setValue(false);
         }
       }
     });
   }
 
   searchCountry() {
-    this.selectedCountry.setValue('');
-    this.selectedGroup.setValue('');
+    this.selectedCountry.setValue(null);
+    this.selectedGroup.setValue(null);
     this.pageForm.updateValueAndValidity();
     const dialogRef = this.dialog.open(SearchCountryComponent, { });
 
     dialogRef.afterClosed().subscribe((result: Country | undefined ) => {
       if(result != undefined) {
-        const group = this.groups.find(group => group.letter === `Grupo ${result.group}`);
-        this.selectedGroup.setValue(group);
+        let groupName =
+        result.group === 'S' ?
+          'Especiales'
+        :
+          `Grupo ${result.group}`;
+        const group = this.groups.find(group => group.letter === groupName);
+        this.selectedGroup.setValue(
+          group === undefined 
+          ? null
+          : group
+        );
         this.selectedCountry.setValue(result.code);
-        this.pageForm.updateValueAndValidity();
       }
     });
   }

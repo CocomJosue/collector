@@ -4,7 +4,7 @@
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Grupo</mat-label>
         <mat-select formControlName="selectedGroup">
-          @for(group of groups; track $index){
+          @for(group of groups; track group.letter){
             <mat-option [value]="group">{{ group.letter }}</mat-option>
           }
         </mat-select>
@@ -16,18 +16,18 @@
         <mat-select formControlName="selectedCountry">
           <mat-select-trigger>
             <div class="selected">
-              @if(selectedGroup.value.letter !=='Especiales') {
+              @if(selectedGroup.value?.letter !=='Especiales') {
                 <img height="21" width="32" [src]="imgUrl + selectedCountry.value">
               }
               <span>{{ selectedCountry.value }}</span>
             </div>
           </mat-select-trigger>
-          @for(country of countries; track $index){
+          @for(country of selectedGroup.value?.countries ?? []; track country.code){
             <mat-option
               [value]="country.code"
               [style.background]="getBackground(country.code)">
               <div class="d-flex">
-                @if(selectedGroup.value.letter !=='Especiales') {
+                @if(selectedGroup.value?.letter !=='Especiales') {
                   <img height="21" width="32" [src]="imgUrl + country.code">
                 }
                 <span>{{ country.name }}</span>
@@ -45,7 +45,7 @@
         <mat-icon>search</mat-icon>
       </button>
     </div>
-    @if(selectedGroup.value !== '' && selectedCountry.value != '') {
+    @if(selectedGroup.value !== null && selectedCountry.value != null) {
       <div class="d-flex">
         <div class="album-page">
           <div class="space-between">

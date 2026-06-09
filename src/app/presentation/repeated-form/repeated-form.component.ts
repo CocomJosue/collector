@@ -35,7 +35,6 @@ export class RepeatedFormComponent {
   repeatedForm!: FormGroup;
   readonly dialog = inject(MatDialog);
   groups: Group[] = GROUPS;
-  countries: Country[] = [];
   numbers = Array.from({ length: 20 }, (_, i) => i + 1);
 
   constructor(private _toastrService: ToastrService) {}
@@ -43,22 +42,29 @@ export class RepeatedFormComponent {
   ngOnInit() {
     this._initForm();
     this._subscribeToPageFormChanges();
+    this.selectedGroup.setValue(this.groups.at(0));
   }
 
   private _initForm() {
     this.repeatedForm = new FormGroup({
-      selectedGroup: new FormControl<string | Group>('', [Validators.required]),
-      selectedCountry: new FormControl<string>('', [Validators.required]),
+      selectedGroup: new FormControl<Group | null>(null, [Validators.required]),
+      selectedCountry: new FormControl<string | null>(null, [Validators.required]),
       selectedSticker: new FormControl<number>(0, [Validators.required])
     })
   }
 
   private _subscribeToPageFormChanges() {
     this.selectedGroup.valueChanges.subscribe({
-      next: (group: Group) => {
-        this.countries = group.countries;
-        this.selectedCountry.setValue('', { emitEvent: false });
-        this.selectedSticker.setValue(0, { emitEvent: false });
+      next: group => {
+        if(group !== null) {
+          this.selectedCountry.enable();
+          if (group?.countries?.length)
+            this.selectedCountry.setValue(group.countries[0].code);
+          else
+            this.selectedCountry.setValue(null);
+          this.selectedSticker.setValue(0, { emitEvent: false });
+        } else
+          this.selectedCountry.disable();
       }
     });
 
@@ -74,17 +80,25 @@ export class RepeatedFormComponent {
   }
 
   searchCountry() {
-    this.selectedCountry.setValue('');
-    this.selectedGroup.setValue('');
+    this.selectedCountry.setValue(null);
+    this.selectedGroup.setValue(null);
     this.repeatedForm.updateValueAndValidity();
     const dialogRef = this.dialog.open(SearchCountryComponent, { });
 
     dialogRef.afterClosed().subscribe((result: Country | undefined ) => {
       if(result != undefined) {
-        const group = this.groups.find(group => group.letter === `Grupo ${result.group}`);
-        this.selectedGroup.setValue(group);
+        let groupName =
+        result.group === 'S' ?
+          'Especiales'
+        :
+          `Grupo ${result.group}`;
+        const group = this.groups.find(group => group.letter === groupName);
+        this.selectedGroup.setValue(
+          group === undefined 
+          ? null
+          : group
+        );
         this.selectedCountry.setValue(result.code);
-        this.repeatedForm.updateValueAndValidity();
       }
     });
   }
