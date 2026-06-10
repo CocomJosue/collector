@@ -41,7 +41,15 @@
                 @for(value of repeatedItem.values; track $index){
                   <mat-chip-row
                     (removed)="remove(getCode(repeatedItem.key), value)">
-                    {{ value + 1 }}
+                    @if(repeatedItem.key !== 'repFWC') {
+                      <span>{{ value + 1 }}</span>
+                    } @else {
+                      @if(value === 0) {
+                        <span>00</span>
+                      } @else {
+                        <span>{{ value }}</span>
+                      }
+                    } 
                     <button matChipRemove [attr.aria-label]="'remove ' + value" class="chip">
                       <mat-icon>cancel</mat-icon>
                     </button>
