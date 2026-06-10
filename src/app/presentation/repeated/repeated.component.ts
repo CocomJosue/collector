@@ -76,13 +76,22 @@ export class RepeatedComponent {
 
   remove(country: string, number: number) {    
     const strRepeatedList = localStorage.getItem(`rep${country}`);
+    let message = 'Se eliminó la estampa repetida ';
     if(strRepeatedList) {
       const repeatedList: any[] = JSON.parse(strRepeatedList);
       const index = repeatedList.indexOf(number);
       if (index !== -1) {
         repeatedList.splice(index, 1);
         localStorage.setItem(`rep${country}`, JSON.stringify(repeatedList));
-        this._toastrService.success(`Se eliminó la estampa repetida ${country}${number}`);
+        if(country !== 'FWC')
+          message += `${country}${number + 1}`;
+        else {
+          if(number === 0)
+            message += `${country}00`;
+          else
+            message += `${country}${number}`;
+        }
+        this._toastrService.success(message);
         this._loadRepeatedStickersList();
       }
     }
