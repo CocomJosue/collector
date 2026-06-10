@@ -39,9 +39,11 @@ export class RepeatedComponent {
     for(const group of this.groups) {
       for(const country of group.countries){
         const code = `rep${country.code}`;
-        const repArray = localStorage.getItem(code);
-        if(repArray !== null) {
-          this.repeatedList.push({ key: code, values: JSON.parse(repArray) });
+        const rep = localStorage.getItem(code);
+        if(rep !== null) {
+          const repArray: number[] = JSON.parse(rep);
+          repArray.sort((a, b) => a - b);
+          this.repeatedList.push({ key: code, values: repArray });
         }
       }
     }

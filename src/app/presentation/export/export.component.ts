@@ -41,6 +41,7 @@ export class ExportComponent {
     this._subscribeToPageFormChanges();
     this._loadRepeatedStickersList();
     this._loadObtainedStickersList();
+    this.exportBy.setValue('Todas');
   }
 
   private _initForm() {
@@ -52,26 +53,31 @@ export class ExportComponent {
   }
 
   private _loadRepeatedStickersList() {
-    this.repeatedList = Object.keys(localStorage)
-    .filter(key => key.startsWith('rep'))
-    .map(key => ({
-      key,
-      values: JSON.parse(localStorage.getItem(key) || '[]')
-    }));
-    for(const repeatedItem of this.repeatedList) {
-      if(repeatedItem.values.length > 0) {
-        this.showSection = true;
+    this.repeatedList = [];
+    for(const group of this.groups) {
+      for(const country of group.countries){
+        const code = `rep${country.code}`;
+        const rep = localStorage.getItem(code);
+        if(rep !== null) {
+          const repArray = JSON.parse(rep);
+          if(repArray.length > 0)
+            this.showSection = true;
+          this.repeatedList.push({ key: code, values: repArray });
+        }
       }
     }
   }
 
   private _loadObtainedStickersList() {
-    this.obtainedList = Object.keys(localStorage)
-    .filter(key => key.length < 4)
-    .map(key => ({
-      key,
-      values: JSON.parse(localStorage.getItem(key) || '[]')
-    }));
+    for(const group of this.groups) {
+      for(const country of group.countries){
+        const page = localStorage.getItem(country.code);
+        if(page !== null){
+          const array = JSON.parse(page);
+          this.obtainedList.push({ key: country.code, values: array });
+        }
+      }
+    }
   }
 
   private _subscribeToPageFormChanges() {
