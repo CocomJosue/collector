@@ -57,34 +57,36 @@
               Seleccionar todo</mat-checkbox>
           </div>
           <section formArrayName="selectedStickers">
-            @if(selectedCountry.value === 'FWC') {
-              @for(ctrl of selectedStickers.controls; track $index){
-                <mat-checkbox
-                  [formControlName]="$index">
-                    @if($index === 0){
-                      00
-                    } @else {
-                      {{ $index }}
-                    }
-                </mat-checkbox>
-              }
-            } @else if (selectedCountry.value === 'CC') {
-              @for(ctrl of selectedStickers.controls; track $index){
-                @if($index < 14) {
-                  <mat-checkbox
-                    [formControlName]="$index">
-                      {{ $index + 1}}
-                  </mat-checkbox>
+            <div class="stickers">
+              @if(selectedCountry.value === 'FWC') {
+                @for(ctrl of selectedStickers.controls; track $index){
+                    <div class="checkbox-container">
+                      <mat-checkbox [formControlName]="$index"></mat-checkbox>
+                      @if($index === 0){
+                        <span>00</span>
+                      } @else {
+                        <span>{{ $index }}</span>
+                      }
+                    </div>
+                  }
+              } @else if (selectedCountry.value === 'CC') {
+                @for(ctrl of selectedStickers.controls; track $index){
+                  @if($index < 14) {
+                    <div class="checkbox-container">
+                      <mat-checkbox [formControlName]="$index"></mat-checkbox>
+                      <span>{{ $index + 1 }}</span>
+                    </div>
+                  }
+                }
+              } @else {
+                @for(ctrl of selectedStickers.controls; track $index){
+                  <div class="checkbox-container">
+                    <mat-checkbox [formControlName]="$index"></mat-checkbox>
+                    <span>{{ $index + 1}}</span>
+                  </div>
                 }
               }
-            } @else {
-              @for(ctrl of selectedStickers.controls; track $index){
-                <mat-checkbox
-                  [formControlName]="$index">
-                    {{ $index + 1}}
-                </mat-checkbox>
-              }
-            }
+            </div>
           </section>
         </div>
       </div>
