@@ -1,15 +1,17 @@
 <div class="table">
   <table matSort (matSortChange)="sortData($event)">
     <tr>
-      <th mat-sort-header="country">Country</th>
-      <th mat-sort-header="count">Count</th>
-      <th mat-sort-header="percentage">Percentage</th>
+      <th mat-sort-header="country" class="country">País</th>
+      <th mat-sort-header="count">Total</th>
+      <th mat-sort-header="percentage">Porcentaje</th>
+      <th mat-sort-header="repeated">Repetidas</th>
     </tr>
     @for(country of countryList; track country) {
       <tr>
         <td>{{country.country}}</td>
         <td>{{country.count}}</td>
         <td>{{country.percentage}}%</td>
+        <td>{{country.repeated}}</td>
       </tr>
     }
   </table>

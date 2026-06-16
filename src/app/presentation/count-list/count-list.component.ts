@@ -35,9 +35,10 @@ export class CountListComponent {
         else
           percentage = numberCount / 14;
         this.countryList.push({
-          country: country.name,
+          country: `(${country.code}) ${country.name}`,
           count: numberCount,
           percentage: Math.round(percentage * 100),
+          repeated: 0
         })
       }
     }
