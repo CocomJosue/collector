@@ -64,3 +64,9 @@ button {
   margin-top: 4px;
   text-align: center;
 }
+
+p.count {
+  margin-top: 5px;
+  text-align: right;
+  width: 100%;
+}

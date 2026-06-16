@@ -10,6 +10,7 @@ import { Group } from '../../core/models/group.interface';
 import { APP_URL, COUNTRIES, GROUPS } from '../../drivers/const/const';
 import { Country } from '../../core/models/country.interface';
 import { ToastrService } from 'ngx-toastr';
+import { ProgressComponent } from '../progress/progress.component';
 
 @Component({
   selector: 'app-export',
@@ -22,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
     MatCardModule,
     MatButton,
     RouterLink,
+    ProgressComponent,
   ],
   templateUrl: './export.component.html',
   styleUrl: './export.component.css'

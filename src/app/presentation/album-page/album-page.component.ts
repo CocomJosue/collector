@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Country } from '../../core/models/country.interface';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { ProgressService } from '../../infrastructure/progress.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatIcon } from '@angular/material/icon';
@@ -25,7 +25,6 @@ import { MatDialog } from '@angular/material/dialog';
     MatSelectModule,
     MatInputModule,
     MatCheckbox,
-    MatButton,
     MatButtonModule,
     MatIcon,
     MatTooltipModule,
@@ -47,6 +46,7 @@ export class AlbumPageComponent {
     this._initForm();
     this._subscribeToPageFormChanges();
     this.selectedGroup.setValue(this.groups.at(0));
+    this.parche();
   }
 
   private _initForm() {
@@ -124,8 +124,12 @@ export class AlbumPageComponent {
     });
   }
 
+  getCountryCount(code: string) {
+    return localStorage.getItem(`count${code}`);
+  }
+
   getPercentage(code: string): number {
-    const count = localStorage.getItem(`count${code}`);
+    const count = this.getCountryCount(code);
     if(count) {
       const numberCount = Number(count);
       if(code != 'CC')
@@ -149,15 +153,31 @@ export class AlbumPageComponent {
     for(const control of this.selectedStickers.controls) {
       control.setValue(actual, { emitEvent: false });
     }
+    this.submit();
+  }
+
+  parche() {
+    const sponsor = localStorage.getItem('CC');
+    if(sponsor) {
+      const array = JSON.parse(sponsor);
+      array.splice(-6, 6, false, false, false, false, false, false);
+      localStorage.setItem('CC', JSON.stringify(array));
+      const checkedCount = array
+        .filter((value: boolean) => value)
+        .length;
+      localStorage.setItem('countCC', checkedCount.toString());
+    }
   }
 
   submit() {
-    if(this.pageForm.valid){
+    if(this.pageForm.valid){      
       localStorage.setItem(this.selectedCountry.value, JSON.stringify(this.selectedStickers.value));
       const checkedCount = this.selectedStickers.value
         .filter((value: boolean) => value)
         .length;
       localStorage.setItem(`count${this.selectedCountry.value}`, checkedCount.toString());
+      if(this.selectedCountry.value === 'CC')
+        this.parche();
       this.progressService.calculateProgress();
       this._toastrService.success('Guardado con éxito');
     }

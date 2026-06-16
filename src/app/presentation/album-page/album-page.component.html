@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="pageForm" (ngSubmit)="submit()">
+  <form [formGroup]="pageForm">
     <div class="d-flex">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Grupo</mat-label>
@@ -61,7 +61,7 @@
               @if(selectedCountry.value === 'FWC') {
                 @for(ctrl of selectedStickers.controls; track $index){
                     <div class="checkbox-container">
-                      <mat-checkbox [formControlName]="$index"></mat-checkbox>
+                      <mat-checkbox [formControlName]="$index" (click)="submit()"></mat-checkbox>
                       @if($index === 0){
                         <span>00</span>
                       } @else {
@@ -73,7 +73,7 @@
                 @for(ctrl of selectedStickers.controls; track $index){
                   @if($index < 14) {
                     <div class="checkbox-container">
-                      <mat-checkbox [formControlName]="$index"></mat-checkbox>
+                      <mat-checkbox [formControlName]="$index" (click)="submit()"></mat-checkbox>
                       <span>{{ $index + 1 }}</span>
                     </div>
                   }
@@ -81,22 +81,15 @@
               } @else {
                 @for(ctrl of selectedStickers.controls; track $index){
                   <div class="checkbox-container">
-                    <mat-checkbox [formControlName]="$index"></mat-checkbox>
+                    <mat-checkbox [formControlName]="$index" (click)="submit()"></mat-checkbox>
                     <span>{{ $index + 1}}</span>
                   </div>
                 }
               }
             </div>
+            <p class="count">{{ getCountryCount(selectedCountry.value) }} / {{ selectedCountry.value === 'CC' ? '14' : '20' }}</p>
           </section>
         </div>
-      </div>
-    }
-    @if(pageForm.valid) {
-      <div class="actions">
-        <button 
-          mat-flat-button 
-          type="submit" 
-          [disabled]="pageForm.invalid">Guardar</button>
       </div>
     }
   </form>

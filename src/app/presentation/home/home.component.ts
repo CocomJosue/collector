@@ -5,7 +5,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
-import { ProgressComponent } from '../progress/progress.component';
 import { AlbumPageComponent } from '../album-page/album-page.component';
 import { RouterLink } from '@angular/router';
 import { Country } from '../../core/models/country.interface';
@@ -22,7 +21,6 @@ import { ImportProgressComponent } from '../import-progress/import-progress.comp
     MatCardModule,
     MatRadioModule,
     MatButtonModule,
-    ProgressComponent,
     AlbumPageComponent,
     RouterLink,
     ImportProgressComponent
