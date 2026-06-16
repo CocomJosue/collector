@@ -11,6 +11,7 @@ import { APP_URL, COUNTRIES, GROUPS } from '../../drivers/const/const';
 import { Country } from '../../core/models/country.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ProgressComponent } from '../progress/progress.component';
+import { MatCheckbox } from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-export',
@@ -24,7 +25,8 @@ import { ProgressComponent } from '../progress/progress.component';
     MatButton,
     RouterLink,
     ProgressComponent,
-  ],
+    MatCheckbox
+],
   templateUrl: './export.component.html',
   styleUrl: './export.component.css'
 })
@@ -35,6 +37,7 @@ export class ExportComponent {
   obtainedList: { key: string, values: number[] }[] = [];
   options: string[] = ['Todas', 'Grupo', 'Pais'];
   showSection = false;
+  onlyRepeated = new FormControl<boolean>(false);
 
   constructor(private _toastrService: ToastrService) {}
 
@@ -133,49 +136,57 @@ export class ExportComponent {
         }
       }
     }
-    message += '\n\nY estoy buscando: ';
-    let canExchange = false;
-    for(const obtainedItem of this.obtainedList) {
-      const notObtained = obtainedItem.values
-      .map((value, index) => !value ? index : -1)
-      .filter(index => index !== -1);
-      if(notObtained.length > 0) {
-        canExchange = true;
-        const country = countries.find(x => x.code == obtainedItem.key);
-        if(country) {
-          message += `\n${country.name} - `;
-          for(const item of notObtained) {
-            if(obtainedItem.key === 'CC') {
-              if(item < 14)
+    if(this.onlyRepeated.value) {
+      message += '\n\nEstoy usando app-collector para completar mi clección.\n¡Entra en el siguiente enlace para que la uses tú también!';
+      message += `\n${APP_URL}`;
+      navigator.clipboard.writeText(message).then(() => {
+        this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos. ¡Gracias por usar app-collector!');
+      });
+    } else {
+      message += '\n\nY estoy buscando: ';
+      let canExchange = false;
+      for(const obtainedItem of this.obtainedList) {
+        const notObtained = obtainedItem.values
+        .map((value, index) => !value ? index : -1)
+        .filter(index => index !== -1);
+        if(notObtained.length > 0) {
+          canExchange = true;
+          const country = countries.find(x => x.code == obtainedItem.key);
+          if(country) {
+            message += `\n${country.name} - `;
+            for(const item of notObtained) {
+              if(obtainedItem.key === 'CC') {
+                if(item < 14)
+                  message += `${obtainedItem.key}${item + 1}; `;
+              } else if(obtainedItem.key === 'FWC') {
+                if(item === 0)
+                  message += `${obtainedItem.key}00; `;
+                else
+                  message += `${obtainedItem.key}${item}; `;
+              } else {
                 message += `${obtainedItem.key}${item + 1}; `;
-            } else if(obtainedItem.key === 'FWC') {
-              if(item === 0)
-                message += `${obtainedItem.key}00; `;
-              else
-                message += `${obtainedItem.key}${item}; `;
-            } else {
-              message += `${obtainedItem.key}${item + 1}; `;
+              }
             }
           }
         }
       }
-    }
-    message += '\n\nEstoy usando app-collector para completar mi clección.\n¡Entra en el siguiente enlace para que la uses tú también!';
-    message += `\n${APP_URL}`;
-    if(canExchange) {
-      navigator.clipboard.writeText(message)
-      .then(() => {
-        this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos. ¡Gracias por usar app-collector!');
-      })
-    }
-    else {
-      if(this.exportBy.value !== 'Todas')
-        this._toastrService.error(`Ya no hay más estampas por encontrar para este ${this.exportBy.value}`);
-      else
-        navigator.clipboard.writeText(`¡Conseguí todas las estamopas! Te recomiendo utilizar app-collector para que tú también las consigas.\n${APP_URL}`)
+      message += '\n\nEstoy usando app-collector para completar mi clección.\n¡Entra en el siguiente enlace para que la uses tú también!';
+      message += `\n${APP_URL}`;
+      if(canExchange) {
+        navigator.clipboard.writeText(message)
         .then(() => {
           this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos. ¡Gracias por usar app-collector!');
         })
+      }
+      else {
+        if(this.exportBy.value !== 'Todas')
+          this._toastrService.error(`Ya no hay más estampas por encontrar para este ${this.exportBy.value}`);
+        else
+          navigator.clipboard.writeText(`¡Conseguí todas las estamopas! Te recomiendo utilizar app-collector para que tú también las consigas.\n${APP_URL}`)
+          .then(() => {
+            this._toastrService.success('Se ha copiado el mensaje en el portapapeles, pégalo en tu grupo de amigos. ¡Gracias por usar app-collector!');
+          })
+      }
     }
   }
 

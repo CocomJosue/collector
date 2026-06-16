@@ -77,8 +77,11 @@
               }
             </mat-grid-list>
           }
+          <app-progress></app-progress>
         </div>
-        <app-progress></app-progress>
+        <div class="only">
+          <mat-checkbox [formControl]="onlyRepeated">Sólo repetidas</mat-checkbox>
+        </div>
       </mat-card-content>
       <mat-card-actions align="end">
         <button 

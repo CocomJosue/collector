@@ -13,7 +13,7 @@ mat-card {
 .repeated-content {
   padding-block: 15px;
   max-width: 80vw;
-  max-height: 52vh;
+  max-height: 50vh;
   overflow-y: auto;
 }
 
@@ -94,4 +94,9 @@ button.add:disabled {
 
 button.back {
   color: #095709;
+}
+
+.only {
+  width: 100%;
+  text-align: right;
 }
