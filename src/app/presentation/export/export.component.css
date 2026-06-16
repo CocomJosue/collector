@@ -58,6 +58,12 @@ mat-chip-row {
   align-items: baseline;
 }
 
+.space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 img {
   margin-right: 25px;
 }

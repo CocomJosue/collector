@@ -1,0 +1,16 @@
+<div class="table">
+  <table matSort (matSortChange)="sortData($event)">
+    <tr>
+      <th mat-sort-header="country">Country</th>
+      <th mat-sort-header="count">Count</th>
+      <th mat-sort-header="percentage">Percentage</th>
+    </tr>
+    @for(country of countryList; track country) {
+      <tr>
+        <td>{{country.country}}</td>
+        <td>{{country.count}}</td>
+        <td>{{country.percentage}}%</td>
+      </tr>
+    }
+  </table>
+</div>

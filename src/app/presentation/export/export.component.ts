@@ -12,6 +12,7 @@ import { Country } from '../../core/models/country.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ProgressComponent } from '../progress/progress.component';
 import { MatCheckbox } from "@angular/material/checkbox";
+import { CountListComponent } from '../count-list/count-list.component';
 
 @Component({
   selector: 'app-export',
@@ -25,8 +26,9 @@ import { MatCheckbox } from "@angular/material/checkbox";
     MatButton,
     RouterLink,
     ProgressComponent,
-    MatCheckbox
-],
+    MatCheckbox,
+    CountListComponent
+  ],
   templateUrl: './export.component.html',
   styleUrl: './export.component.css'
 })
