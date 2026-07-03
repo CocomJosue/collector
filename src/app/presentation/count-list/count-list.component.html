@@ -6,7 +6,7 @@
       <th mat-sort-header="percentage">Porcentaje</th>
       <th mat-sort-header="repeated">Repetidas</th>
     </tr>
-    @for(country of countryList; track country) {
+    @for(country of sortedData; track country) {
       <tr>
         <td>{{country.country}}</td>
         <td>{{country.count}}</td>

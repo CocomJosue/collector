@@ -4,11 +4,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-import-progress',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIcon, MatTooltipModule],
+  imports: [CommonModule, MatButtonModule, MatIcon, MatTooltipModule, RouterLink],
   templateUrl: './import-progress.component.html',
   styleUrl: './import-progress.component.css'
 })

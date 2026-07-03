@@ -1,0 +1,50 @@
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  background-color: #095709;
+  color: #fff;
+  border: 1px solid #095709;
+}
+
+h3 {
+  font-size: 16pt;
+  margin: 0;
+}
+
+button.link-button {
+  color: #8de08d;
+}
+
+button.link {
+  color:#095709;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.principal {
+  display: flex;
+  height: 93dvh;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: #063606;
+}
+
+mat-card-title {
+  margin-bottom: 15px;
+  color:#063606;
+  font-weight: bold;
+}
+
+.welcome-content {
+  padding-block: 15px;
+  max-width: 80vw;
+  max-height: 62vh;
+  overflow-y: auto;
+}

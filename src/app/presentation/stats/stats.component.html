@@ -1,0 +1,32 @@
+<div class="info">
+  <button
+    mat-button 
+    type="button"
+    class="link-button"
+    routerLink="/about">Acerca de</button>
+  <h3>App Collector</h3>
+  <button
+    mat-button
+    type="button"
+    class="link-button"
+    routerLink="/contact">Contacto</button>
+</div>
+<div class="principal">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Tus estadísticas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="welcome-content">
+        <app-progress></app-progress>
+        <app-count-list></app-count-list>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button 
+        class="link"
+        mat-stroked-button
+        routerLink="/">Regresar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

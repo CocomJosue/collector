@@ -10,9 +10,7 @@ import { Group } from '../../core/models/group.interface';
 import { APP_URL, COUNTRIES, GROUPS } from '../../drivers/const/const';
 import { Country } from '../../core/models/country.interface';
 import { ToastrService } from 'ngx-toastr';
-import { ProgressComponent } from '../progress/progress.component';
 import { MatCheckbox } from "@angular/material/checkbox";
-import { CountListComponent } from '../count-list/count-list.component';
 
 @Component({
   selector: 'app-export',
@@ -25,9 +23,7 @@ import { CountListComponent } from '../count-list/count-list.component';
     MatCardModule,
     MatButton,
     RouterLink,
-    ProgressComponent,
     MatCheckbox,
-    CountListComponent
   ],
   templateUrl: './export.component.html',
   styleUrl: './export.component.css'

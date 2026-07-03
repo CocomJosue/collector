@@ -26,9 +26,15 @@ export class CountListComponent {
 
   private _getCountryList() {
     for(const country of COUNTRIES) {
+      let numberRep = 0;
       const count = localStorage.getItem(`count${country.code}`);
-      if(count) {
+      const rep = localStorage.getItem(`rep${country.code}`);
+      if(count && rep) {
         const numberCount = Number(count);
+        const repArray = JSON.parse(rep);
+        if(repArray) {
+          numberRep = repArray.length;
+        }
         let percentage = 0;
         if(country.code !== 'CC')
           percentage = numberCount / 20;
@@ -38,10 +44,12 @@ export class CountListComponent {
           country: `(${country.code}) ${country.name}`,
           count: numberCount,
           percentage: Math.round(percentage * 100),
-          repeated: 0
+          repeated: numberRep
         })
       }
     }
+
+    this.sortedData = this.countryList.slice();
   }
 
   sortData(sort: Sort) {
@@ -60,6 +68,8 @@ export class CountListComponent {
           return compare(a.count, b.count, isAsc);
         case 'percentage':
           return compare(a.percentage, b.percentage, isAsc);
+        case 'repeated':
+          return compare(a.repeated, b.repeated, isAsc)
         default:
           return 0;
       }

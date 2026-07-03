@@ -1,4 +1,10 @@
 <div class="container">
+  <button 
+    mat-mini-fab color="warn"
+    matTooltip="Revisar estadísticas"
+    routerLink="/stats">
+    <mat-icon>data_saver_off</mat-icon>
+  </button>
   @if(checkData()) {
     <button 
       mat-mini-fab color="primary"
