@@ -89,6 +89,11 @@
           routerLink="/"
           type="button">Regresar</button>
         <button 
+          mat-button 
+          color="primary"
+          (click)="openDialog()"
+          type="button">Intercambiar<mat-icon>sync</mat-icon></button>
+        <button 
           mat-flat-button 
           class="add"
           type="submit"

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +11,9 @@ import { APP_URL, COUNTRIES, GROUPS } from '../../drivers/const/const';
 import { Country } from '../../core/models/country.interface';
 import { ToastrService } from 'ngx-toastr';
 import { MatCheckbox } from "@angular/material/checkbox";
+import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { ExchangeFormComponent } from '../exchange-form/exchange-form.component';
 
 @Component({
   selector: 'app-export',
@@ -24,11 +27,14 @@ import { MatCheckbox } from "@angular/material/checkbox";
     MatButton,
     RouterLink,
     MatCheckbox,
+    MatIcon,
   ],
   templateUrl: './export.component.html',
   styleUrl: './export.component.css'
 })
 export class ExportComponent {
+  readonly dialog = inject(MatDialog);
+  
   exportForm!: FormGroup;
   groups: Group[] = GROUPS;
   repeatedList: { key: string, values: number[] }[] = [];
@@ -186,6 +192,14 @@ export class ExportComponent {
           })
       }
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ExchangeFormComponent, { });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this._loadRepeatedStickersList();
+    });
   }
 
   submit() {

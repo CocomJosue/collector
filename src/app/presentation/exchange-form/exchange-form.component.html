@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Intercambiar con un amigo</h2>
+<mat-dialog-content>
+  <p>Por favor pega en el campo de texto el mensaje de intercambio de tu amigo:</p>
+  <form [formGroup]="exchangeForm" (ngSubmit)="submit()">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Mensaje de intercambio</mat-label>
+      <input matInput formControlName="exchangeMessage" type="text">
+      @if(this.exchangeMessage.hasError('required')){
+        <mat-error>Para poder intercambiar estampas, es necesario que pegues aquí el mensaje de intercambio de tu amigo</mat-error>
+      }
+    </mat-form-field>
+    <div class="actions">
+      <button
+        mat-button 
+        class="back"
+        type="button"
+        (click)="cancelAction()">Cerrar</button>
+      <button 
+        mat-button 
+        color="primary"
+        (click)="check()"
+        type="button">Comprobar</button>
+      <button
+        mat-flat-button 
+        class="add"
+        cdkFocusInitial 
+        type="submit"
+        [disabled]="exchangeForm.invalid">Confirmar intercambio</button>
+    </div>
+  </form>
+</mat-dialog-content>
