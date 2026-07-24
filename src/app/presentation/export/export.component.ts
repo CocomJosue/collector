@@ -195,7 +195,7 @@ export class ExportComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ExchangeFormComponent, { });
+    const dialogRef = this.dialog.open(ExchangeFormComponent, { data: { message: this._generateMsg(COUNTRIES) } });
 
     dialogRef.afterClosed().subscribe(result => {
       this._loadRepeatedStickersList();
